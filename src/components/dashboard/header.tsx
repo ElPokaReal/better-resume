@@ -3,7 +3,9 @@
 import { useState, useRef, useEffect } from 'react';
 import { ViewTransitionLink } from '@/components/view-transition-link';
 import { ThemeToggle } from '@/components/theme-toggle';
-import { Sparkles, User, LogOut, Settings, ChevronDown } from 'lucide-react';
+import { LanguageSwitcher } from '@/components/language-switcher';
+import { Logo } from '@/components/logo';
+import { User, LogOut, Settings, ChevronDown } from 'lucide-react';
 import { signOut, useSession } from '@/lib/auth-client';
 import { useRouter } from 'next/navigation';
 
@@ -36,14 +38,17 @@ export function DashboardHeader() {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <ViewTransitionLink href="/dashboard" className="flex items-center gap-2 group">
-            <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
-              <Sparkles className="w-5 h-5 text-white" />
+            <div className="group-hover:scale-110 transition-transform">
+              <Logo size={32} />
             </div>
             <span className="text-xl font-bold text-gray-900 dark:text-white">Better Resume</span>
           </ViewTransitionLink>
 
           {/* Right side */}
           <div className="flex items-center gap-4">
+            {/* Language Switcher */}
+            <LanguageSwitcher />
+            
             {/* Theme Toggle */}
             <ThemeToggle />
 

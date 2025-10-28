@@ -1,0 +1,144 @@
+{
+  "common": {
+    "save": "Guardar",
+    "cancel": "Cancelar",
+    "delete": "Eliminar",
+    "edit": "Editar",
+    "preview": "Vista Previa",
+    "download": "Descargar",
+    "share": "Compartir",
+    "duplicate": "Duplicar",
+    "loading": "Cargando...",
+    "saving": "Guardando...",
+    "saved": "Guardado",
+    "error": "Error"
+  },
+  "nav": {
+    "dashboard": "Panel",
+    "editor": "Editor",
+    "preview": "Vista Previa",
+    "settings": "Configuración",
+    "logout": "Cerrar Sesión"
+  },
+  "dashboard": {
+    "title": "Mis Currículums",
+    "subtitle": "Gestiona y edita tus currículums profesionales",
+    "createNew": "Crear Nuevo CV",
+    "search": "Buscar currículums...",
+    "empty": "No tienes currículums aún",
+    "emptyDescription": "Crea tu primer currículum profesional",
+    "lastUpdated": "Actualizado {time}",
+    "public": "Público",
+    "private": "Privado"
+  },
+  "editor": {
+    "sections": {
+      "personal": "Personal",
+      "experience": "Experiencia",
+      "education": "Educación",
+      "skills": "Habilidades",
+      "projects": "Proyectos",
+      "certifications": "Certificaciones",
+      "languages": "Idiomas",
+      "custom": "Personalizado"
+    },
+    "personalInfo": {
+      "title": "Información Personal",
+      "subtitle": "Completa tu información básica de contacto",
+      "fullName": "Nombre Completo",
+      "email": "Email",
+      "phone": "Teléfono",
+      "location": "Ubicación",
+      "website": "Sitio Web",
+      "linkedin": "LinkedIn",
+      "github": "GitHub",
+      "summary": "Resumen Profesional",
+      "photo": "Foto de Perfil"
+    },
+    "toolbar": {
+      "back": "Volver",
+      "saving": "Guardando...",
+      "saved": "Guardado hace {time}",
+      "downloadPDF": "Descargar PDF",
+      "share": "Compartir",
+      "expand": "Expandir",
+      "minimize": "Minimizar",
+      "desktop": "Escritorio",
+      "mobile": "Móvil"
+    }
+  },
+  "landing": {
+    "nav": {
+      "login": "Iniciar Sesión",
+      "getStarted": "Comenzar"
+    },
+    "hero": {
+      "title": "Crea currículums que",
+      "titleHighlight": "destaquen",
+      "subtitle": "Diseña tu currículum profesional en minutos con nuestra plataforma intuitiva. Plantillas modernas, personalización completa y exportación a PDF.",
+      "cta": "Crear mi CV gratis",
+      "users": "Únete a miles de profesionales"
+    },
+    "features": {
+      "section1": {
+        "title": "Plantillas que impresionan",
+        "description": "Diseños profesionales creados por expertos. Optimizados para destacar ante reclutadores.",
+        "link": "Ver plantillas"
+      },
+      "section2": {
+        "title": "Edición ultrarrápida",
+        "description": "Completa tu currículum en minutos con nuestra interfaz intuitiva. Cambios en tiempo real.",
+        "link": "Conoce más",
+        "badge": "Editando en tiempo real"
+      },
+      "section3": {
+        "title": "Listo para enviar",
+        "description": "Exporta en PDF de alta calidad. Compatible con sistemas ATS y listo para compartir con empleadores.",
+        "link": "Ver características",
+        "filename": "Mi_Curriculum.pdf",
+        "ready": "Listo",
+        "preview": "Vista previa PDF",
+        "download": "Descargar"
+      }
+    },
+    "cta": {
+      "title": "Prueba Better Resume ahora",
+      "subtitle": "Gratis para siempre. Sin tarjeta de crédito.",
+      "button": "Comenzar gratis"
+    },
+    "footer": {
+      "tagline": "Crea currículums profesionales en minutos",
+      "product": "Producto",
+      "features": "Características",
+      "pricing": "Precios",
+      "templates": "Plantillas",
+      "company": "Compañía",
+      "about": "Acerca de",
+      "blog": "Blog",
+      "contact": "Contacto",
+      "legal": "Legal",
+      "privacy": "Privacidad",
+      "terms": "Términos",
+      "rights": "Todos los derechos reservados"
+    }
+  },
+  "auth": {
+    "login": "Iniciar Sesión",
+    "signup": "Registrarse",
+    "email": "Correo Electrónico",
+    "password": "Contraseña",
+    "forgotPassword": "¿Olvidaste tu contraseña?",
+    "noAccount": "¿No tienes cuenta?",
+    "hasAccount": "¿Ya tienes cuenta?"
+  },
+  "toast": {
+    "pdfDownloaded": "PDF descargado",
+    "pdfError": "Error al generar PDF",
+    "cvDuplicated": "CV duplicado",
+    "cvDeleted": "CV eliminado",
+    "cvPublic": "CV ahora es público",
+    "cvPrivate": "CV ahora es privado",
+    "linkCopied": "Link copiado al portapapeles",
+    "confirmDelete": "¿Estás seguro de eliminar este CV? Esta acción no se puede deshacer."
+  }
+}

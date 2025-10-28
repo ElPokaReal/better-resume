@@ -1,0 +1,144 @@
+{
+  "common": {
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "preview": "Preview",
+    "download": "Download",
+    "share": "Share",
+    "duplicate": "Duplicate",
+    "loading": "Loading...",
+    "saving": "Saving...",
+    "saved": "Saved",
+    "error": "Error"
+  },
+  "nav": {
+    "dashboard": "Dashboard",
+    "editor": "Editor",
+    "preview": "Preview",
+    "settings": "Settings",
+    "logout": "Logout"
+  },
+  "dashboard": {
+    "title": "My Resumes",
+    "subtitle": "Manage and edit your professional resumes",
+    "createNew": "Create New Resume",
+    "search": "Search resumes...",
+    "empty": "You don't have any resumes yet",
+    "emptyDescription": "Create your first professional resume",
+    "lastUpdated": "Updated {time}",
+    "public": "Public",
+    "private": "Private"
+  },
+  "editor": {
+    "sections": {
+      "personal": "Personal",
+      "experience": "Experience",
+      "education": "Education",
+      "skills": "Skills",
+      "projects": "Projects",
+      "certifications": "Certifications",
+      "languages": "Languages",
+      "custom": "Custom"
+    },
+    "personalInfo": {
+      "title": "Personal Information",
+      "subtitle": "Complete your basic contact information",
+      "fullName": "Full Name",
+      "email": "Email",
+      "phone": "Phone",
+      "location": "Location",
+      "website": "Website",
+      "linkedin": "LinkedIn",
+      "github": "GitHub",
+      "summary": "Professional Summary",
+      "photo": "Profile Photo"
+    },
+    "toolbar": {
+      "back": "Back",
+      "saving": "Saving...",
+      "saved": "Saved {time} ago",
+      "downloadPDF": "Download PDF",
+      "share": "Share",
+      "expand": "Expand",
+      "minimize": "Minimize",
+      "desktop": "Desktop",
+      "mobile": "Mobile"
+    }
+  },
+  "landing": {
+    "nav": {
+      "login": "Login",
+      "getStarted": "Get Started"
+    },
+    "hero": {
+      "title": "Create resumes that",
+      "titleHighlight": "stand out",
+      "subtitle": "Design your professional resume in minutes with our intuitive platform. Modern templates, complete customization, and PDF export.",
+      "cta": "Create my resume for free",
+      "users": "Join thousands of professionals"
+    },
+    "features": {
+      "section1": {
+        "title": "Templates that impress",
+        "description": "Professional designs created by experts. Optimized to stand out to recruiters.",
+        "link": "View templates"
+      },
+      "section2": {
+        "title": "Ultra-fast editing",
+        "description": "Complete your resume in minutes with our intuitive interface. Real-time changes.",
+        "link": "Learn more",
+        "badge": "Editing in real-time"
+      },
+      "section3": {
+        "title": "Ready to send",
+        "description": "Export in high-quality PDF. ATS-compatible and ready to share with employers.",
+        "link": "View features",
+        "filename": "My_Resume.pdf",
+        "ready": "Ready",
+        "preview": "PDF preview",
+        "download": "Download"
+      }
+    },
+    "cta": {
+      "title": "Try Better Resume now",
+      "subtitle": "Free forever. No credit card required.",
+      "button": "Get started for free"
+    },
+    "footer": {
+      "tagline": "Create professional resumes in minutes",
+      "product": "Product",
+      "features": "Features",
+      "pricing": "Pricing",
+      "templates": "Templates",
+      "company": "Company",
+      "about": "About",
+      "blog": "Blog",
+      "contact": "Contact",
+      "legal": "Legal",
+      "privacy": "Privacy",
+      "terms": "Terms",
+      "rights": "All rights reserved"
+    }
+  },
+  "auth": {
+    "login": "Login",
+    "signup": "Sign Up",
+    "email": "Email",
+    "password": "Password",
+    "forgotPassword": "Forgot your password?",
+    "noAccount": "Don't have an account?",
+    "hasAccount": "Already have an account?"
+  },
+  "toast": {
+    "pdfDownloaded": "PDF downloaded",
+    "pdfError": "Error generating PDF",
+    "cvDuplicated": "Resume duplicated",
+    "cvDeleted": "Resume deleted",
+    "cvPublic": "Resume is now public",
+    "cvPrivate": "Resume is now private",
+    "linkCopied": "Link copied to clipboard",
+    "confirmDelete": "Are you sure you want to delete this resume? This action cannot be undone."
+  }
+}

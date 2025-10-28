@@ -1,6 +1,6 @@
 'use client';
 
-import { ExternalLink } from 'lucide-react';
+import { ExternalLink, Mail, Phone, MapPin, Globe, Linkedin, Github } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import type { Resume } from '@/types/resume';
 
@@ -89,7 +89,7 @@ export function EditorPreview({ resume, previewMode, isExpanded }: EditorPreview
                   <div className="flex flex-wrap justify-center gap-x-3 gap-y-1 text-sm mb-4">
                     {resume.personalInfo.website && (
                     <a href={resume.personalInfo.website} target="_blank" rel="noopener noreferrer" className="hover:underline" style={{ color: colorScheme.primary }}>
-                      {resume.personalInfo.website.replace(/^https?:\/\/(www\.)?/, '')}
+                      Sitio Web
                     </a>
                   )}
                   {resume.personalInfo.linkedin && (
@@ -439,19 +439,34 @@ export function EditorPreview({ resume, previewMode, isExpanded }: EditorPreview
   );
 
   const renderSidebarLayout = () => (
-    <div className={`w-full h-full bg-white flex ${spacing}`}>
+    <div className="w-full bg-white flex min-h-[297mm]">
       {/* Left Sidebar - 1/3 */}
       <div className="w-1/3 p-8 space-y-6" style={{ backgroundColor: colorScheme.light }}>
         {/* Personal Info */}
         {resume.personalInfo && (
           <div>
-            <h1 className="text-2xl font-bold text-gray-900 mb-2">
+            <h1 className="text-2xl font-bold text-gray-900 mb-4">
               {resume.personalInfo.fullName || 'Tu Nombre'}
             </h1>
-            <div className="space-y-1 text-sm text-gray-700">
-              {resume.personalInfo.email && <p>{resume.personalInfo.email}</p>}
-              {resume.personalInfo.phone && <p>{resume.personalInfo.phone}</p>}
-              {resume.personalInfo.location && <p>{resume.personalInfo.location}</p>}
+            <div className="space-y-2 text-sm text-gray-700">
+              {resume.personalInfo.email && (
+                <div className="flex items-center gap-2">
+                  <Mail className="w-4 h-4 flex-shrink-0" style={{ color: colorScheme.dark }} />
+                  <span className="break-all">{resume.personalInfo.email}</span>
+                </div>
+              )}
+              {resume.personalInfo.phone && (
+                <div className="flex items-center gap-2">
+                  <Phone className="w-4 h-4 flex-shrink-0" style={{ color: colorScheme.dark }} />
+                  <span>{resume.personalInfo.phone}</span>
+                </div>
+              )}
+              {resume.personalInfo.location && (
+                <div className="flex items-center gap-2">
+                  <MapPin className="w-4 h-4 flex-shrink-0" style={{ color: colorScheme.dark }} />
+                  <span>{resume.personalInfo.location}</span>
+                </div>
+              )}
             </div>
           </div>
         )}
@@ -459,21 +474,24 @@ export function EditorPreview({ resume, previewMode, isExpanded }: EditorPreview
         {/* Links */}
         {(resume.personalInfo?.website || resume.personalInfo?.linkedin || resume.personalInfo?.github) && (
           <div>
-            <h3 className="text-sm font-bold text-gray-900 mb-2 uppercase tracking-wide">Enlaces</h3>
-            <div className="space-y-1 text-sm">
+            <h3 className="text-sm font-bold text-gray-900 mb-3 uppercase tracking-wide">Enlaces</h3>
+            <div className="space-y-2 text-sm">
               {resume.personalInfo.website && (
-                <a href={resume.personalInfo.website} target="_blank" rel="noopener noreferrer" className="block hover:underline" style={{ color: colorScheme.dark }}>
-                  Website
+                <a href={resume.personalInfo.website} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:underline" style={{ color: colorScheme.dark }}>
+                  <Globe className="w-4 h-4 flex-shrink-0" />
+                  <span className="break-all">Sitio Web</span>
                 </a>
               )}
               {resume.personalInfo.linkedin && (
-                <a href={resume.personalInfo.linkedin} target="_blank" rel="noopener noreferrer" className="block hover:underline" style={{ color: colorScheme.dark }}>
-                  LinkedIn
+                <a href={resume.personalInfo.linkedin} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:underline" style={{ color: colorScheme.dark }}>
+                  <Linkedin className="w-4 h-4 flex-shrink-0" />
+                  <span>LinkedIn</span>
                 </a>
               )}
               {resume.personalInfo.github && (
-                <a href={resume.personalInfo.github} target="_blank" rel="noopener noreferrer" className="block hover:underline" style={{ color: colorScheme.dark }}>
-                  GitHub
+                <a href={resume.personalInfo.github} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:underline" style={{ color: colorScheme.dark }}>
+                  <Github className="w-4 h-4 flex-shrink-0" />
+                  <span>GitHub</span>
                 </a>
               )}
             </div>
@@ -512,6 +530,18 @@ export function EditorPreview({ resume, previewMode, isExpanded }: EditorPreview
 
       {/* Right Content - 2/3 */}
       <div className="w-2/3 p-12 space-y-6">
+        {/* Summary */}
+        {resume.personalInfo?.summary && (
+          <div>
+            <h2 className="text-2xl font-bold text-gray-900 mb-4 pb-2 border-b-2" style={{ borderColor: colorScheme.primary }}>
+              Resumen Profesional
+            </h2>
+            <p className="text-sm text-gray-700 leading-relaxed">
+              {resume.personalInfo.summary}
+            </p>
+          </div>
+        )}
+
         {/* Experience */}
         {resume.sectionVisibility.experience && resume.experience.length > 0 && (
           <div>

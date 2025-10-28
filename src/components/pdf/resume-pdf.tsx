@@ -1,4 +1,4 @@
-import { Document, Page, Text, View, StyleSheet, Font } from '@react-pdf/renderer';
+import { Document, Page, Text, View, StyleSheet, Link } from '@react-pdf/renderer';
 import type { Resume } from '@/types/resume';
 
 interface ResumePDFProps {
@@ -140,15 +140,29 @@ export function ResumePDF({ resume }: ResumePDFProps) {
             .join(' • ')}
         </Text>
         {(personalInfo.website || personalInfo.linkedin || personalInfo.github) && (
-          <Text style={styles.links}>
-            {[
-              personalInfo.website,
-              personalInfo.linkedin,
-              personalInfo.github,
-            ]
-              .filter(Boolean)
-              .join(' • ')}
-          </Text>
+          <View style={{ flexDirection: 'row', justifyContent: 'center', gap: 8, marginTop: 4 }}>
+            {personalInfo.website && (
+              <>
+                <Link src={personalInfo.website} style={styles.links}>
+                  Sitio Web
+                </Link>
+                {(personalInfo.linkedin || personalInfo.github) && <Text style={styles.links}>•</Text>}
+              </>
+            )}
+            {personalInfo.linkedin && (
+              <>
+                <Link src={personalInfo.linkedin} style={styles.links}>
+                  LinkedIn
+                </Link>
+                {personalInfo.github && <Text style={styles.links}>•</Text>}
+              </>
+            )}
+            {personalInfo.github && (
+              <Link src={personalInfo.github} style={styles.links}>
+                GitHub
+              </Link>
+            )}
+          </View>
         )}
       </View>
 
@@ -219,6 +233,23 @@ export function ResumePDF({ resume }: ResumePDFProps) {
           {resume.projects.map((project) => (
             <View key={project.id} style={styles.itemContainer}>
               <Text style={styles.itemTitle}>{project.name}</Text>
+              {(project.url || project.github) && (
+                <View style={{ flexDirection: 'row', gap: 8, marginBottom: 4 }}>
+                  {project.url && (
+                    <>
+                      <Link src={project.url} style={styles.itemSubtitle}>
+                        Ver Proyecto
+                      </Link>
+                      {project.github && <Text style={styles.itemSubtitle}>•</Text>}
+                    </>
+                  )}
+                  {project.github && (
+                    <Link src={project.github} style={styles.itemSubtitle}>
+                      GitHub
+                    </Link>
+                  )}
+                </View>
+              )}
               <Text style={styles.itemDescription}>{project.description}</Text>
               {project.technologies && project.technologies.length > 0 && (
                 <Text style={styles.itemSubtitle}>
@@ -313,9 +344,21 @@ export function ResumePDF({ resume }: ResumePDFProps) {
           {(resume.personalInfo.website || resume.personalInfo.linkedin || resume.personalInfo.github) && (
             <View style={styles.sidebarSection}>
               <Text style={styles.sidebarTitle}>Enlaces</Text>
-              {resume.personalInfo.website && <Text style={styles.sidebarItem}>Website</Text>}
-              {resume.personalInfo.linkedin && <Text style={styles.sidebarItem}>LinkedIn</Text>}
-              {resume.personalInfo.github && <Text style={styles.sidebarItem}>GitHub</Text>}
+              {resume.personalInfo.website && (
+                <Link src={resume.personalInfo.website} style={styles.sidebarItem}>
+                  Sitio Web
+                </Link>
+              )}
+              {resume.personalInfo.linkedin && (
+                <Link src={resume.personalInfo.linkedin} style={styles.sidebarItem}>
+                  LinkedIn
+                </Link>
+              )}
+              {resume.personalInfo.github && (
+                <Link src={resume.personalInfo.github} style={styles.sidebarItem}>
+                  GitHub
+                </Link>
+              )}
             </View>
           )}
 

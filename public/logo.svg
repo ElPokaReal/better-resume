@@ -1,0 +1,39 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background - solid blue -->
+  <rect width="512" height="512" rx="120" fill="#3B82F6"/>
+  
+  <!-- Document/Resume paper -->
+  <g transform="translate(112, 80)">
+    <!-- Paper shadow -->
+    <rect x="8" y="8" width="288" height="352" rx="16" fill="black" opacity="0.15"/>
+    
+    <!-- Main paper -->
+    <rect width="288" height="352" rx="16" fill="white" stroke="#E5E7EB" stroke-width="3"/>
+    
+    <!-- Document fold corner -->
+    <path d="M 224 0 L 224 64 L 288 64 L 224 0 Z" fill="#E5E7EB" opacity="0.5"/>
+    <path d="M 224 16 L 224 64 L 272 64 L 224 16 Z" fill="#F3F4F6"/>
+    
+    <!-- Header section (profile area) -->
+    <rect x="32" y="32" width="80" height="80" rx="40" fill="#3B82F6" opacity="0.1"/>
+    <circle cx="72" cy="72" r="32" fill="#3B82F6"/>
+    
+    <!-- Name lines -->
+    <rect x="128" y="48" width="128" height="16" rx="8" fill="#1F2937"/>
+    <rect x="128" y="76" width="96" height="12" rx="6" fill="#6B7280"/>
+    
+    <!-- Section 1 -->
+    <rect x="32" y="144" width="224" height="12" rx="6" fill="#3B82F6" opacity="0.2"/>
+    <rect x="32" y="172" width="208" height="8" rx="4" fill="#9CA3AF"/>
+    <rect x="32" y="188" width="192" height="8" rx="4" fill="#9CA3AF"/>
+    <rect x="32" y="204" width="216" height="8" rx="4" fill="#9CA3AF"/>
+    
+    <!-- Section 2 -->
+    <rect x="32" y="236" width="224" height="12" rx="6" fill="#3B82F6" opacity="0.2"/>
+    <rect x="32" y="264" width="200" height="8" rx="4" fill="#9CA3AF"/>
+    <rect x="32" y="280" width="208" height="8" rx="4" fill="#9CA3AF"/>
+    
+    <!-- Section 3 -->
+    <rect x="32" y="312" width="176" height="8" rx="4" fill="#9CA3AF"/>
+  </g>
+</svg>

@@ -17,7 +17,13 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Better Resume - Your Resume Builder",
   description: "Create your resume with ease and professionalism",
+  icons: {
+    icon: '/icon.svg',
+    shortcut: '/icon.svg',
+    apple: '/icon.svg',
+  },
 };
+
 
 export default function RootLayout({
   children,
@@ -25,7 +31,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="es" suppressHydrationWarning>
+    <html suppressHydrationWarning>
       <head>
         <script
           dangerouslySetInnerHTML={{
