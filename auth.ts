@@ -49,12 +49,25 @@ export const auth = betterAuth({
     afterSignUp: '/en/dashboard',
     onError: '/en/login',
   },
+  session: {
+    cookieCache: {
+      enabled: true,
+      maxAge: 5 * 60, // 5 minutos
+    },
+  },
   advanced: {
     useSecureCookies: process.env.NODE_ENV === 'production',
     cookiePrefix: 'better-resume',
+    crossSubDomainCookies: {
+      enabled: false,
+    },
   },
+  trustedOrigins: [
+    process.env.BETTER_AUTH_URL || 'http://localhost:3000',
+    process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000',
+  ],
   logger: {
-    level: 'error',
+    level: 'debug',
     disabled: false,
   },
 });

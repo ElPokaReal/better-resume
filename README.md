@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="https://i.imgur.com/IMCNcdG.png" alt="Better Resume Logo" width="500"/>
+  <img src="https://i.imgur.com/33x5Gxc.png" alt="Better Resume Logo" width="500"/>
   
   <h3>Create professional resumes effortlessly</h3>
   

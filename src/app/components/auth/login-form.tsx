@@ -52,20 +52,28 @@ export function LoginForm() {
 
   const handleGitHubSignIn = async () => {
     setGithubLoading(true);
+    setError('');
     try {
+      console.log('[Auth] Iniciando GitHub OAuth...');
+      console.log('[Auth] Base URL:', process.env.NEXT_PUBLIC_APP_URL);
       await signInWithGitHub();
     } catch (err) {
-      setError('Error al iniciar sesión con GitHub');
+      console.error('[Auth] Error GitHub:', err);
+      setError('Error al iniciar sesión con GitHub. Verifica la configuración de OAuth.');
       setGithubLoading(false);
     }
   };
 
   const handleGoogleSignIn = async () => {
     setGoogleLoading(true);
+    setError('');
     try {
+      console.log('[Auth] Iniciando Google OAuth...');
+      console.log('[Auth] Base URL:', process.env.NEXT_PUBLIC_APP_URL);
       await signInWithGoogle();
     } catch (err) {
-      setError('Error al iniciar sesión con Google');
+      console.error('[Auth] Error Google:', err);
+      setError('Error al iniciar sesión con Google. Verifica la configuración de OAuth.');
       setGoogleLoading(false);
     }
   };
