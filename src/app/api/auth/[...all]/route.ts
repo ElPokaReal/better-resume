@@ -15,6 +15,28 @@ export async function GET(request: NextRequest) {
         location: response.headers.get('location'),
         cookies: response.headers.get('set-cookie'),
       });
+      
+      // Verificar si la cookie se está estableciendo correctamente
+      const setCookieHeader = response.headers.get('set-cookie');
+      if (setCookieHeader) {
+        console.log('[Auth] Cookie details:', {
+          hasSessionToken: setCookieHeader.includes('session_token'),
+          isSecure: setCookieHeader.includes('Secure'),
+          isHttpOnly: setCookieHeader.includes('HttpOnly'),
+          sameSite: setCookieHeader.includes('SameSite'),
+        });
+      } else {
+        console.error('[Auth] WARNING: No Set-Cookie header found!');
+      }
+    }
+    
+    // Log para verificar sesión
+    if (request.nextUrl.pathname.includes('/session')) {
+      const cookies = request.headers.get('cookie');
+      console.log('[Auth] Session check:', {
+        hasCookies: !!cookies,
+        cookies: cookies?.substring(0, 100), // Solo primeros 100 chars
+      });
     }
     
     return response;
