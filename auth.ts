@@ -56,14 +56,14 @@ export const auth = betterAuth({
     },
   },
   advanced: {
-    useSecureCookies: process.env.NODE_ENV === 'production',
+    useSecureCookies: false, // Desactivar __Secure- prefix que causa problemas
     cookiePrefix: 'better-resume',
     crossSubDomainCookies: {
       enabled: false,
     },
     defaultCookieAttributes: {
       sameSite: 'lax',
-      secure: process.env.NODE_ENV === 'production',
+      secure: true, // Mantener secure pero sin el prefijo __Secure-
       httpOnly: true,
       path: '/',
     },
