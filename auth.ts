@@ -31,7 +31,7 @@ export const auth = betterAuth({
     },
   },
   callbacks: {
-    async onSignIn(user, session) {
+    async onSignIn(user: any, session: any) {
       console.log('[Auth] User signed in:', user.email);
       return {
         user,

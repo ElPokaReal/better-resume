@@ -114,6 +114,7 @@ export default function PreviewPage({ params }: PreviewPageProps) {
       spacing: 'normal',
     },
     isPublic: resumeData.isPublic || false,
+    isFavorite: resumeData.isFavorite || false,
     viewCount: resumeData.viewCount || 0,
     downloadCount: resumeData.downloadCount || 0,
     createdAt: resumeData.createdAt,

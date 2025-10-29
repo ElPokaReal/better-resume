@@ -42,6 +42,7 @@ export function ResumeMiniPreview({ resume }: ResumeMiniPreviewProps) {
       languages: true,
     },
     isPublic: resume.isPublic || false,
+    isFavorite: resume.isFavorite || false,
     viewCount: resume.viewCount || 0,
     downloadCount: resume.downloadCount || 0,
     createdAt: resume.createdAt || new Date(),

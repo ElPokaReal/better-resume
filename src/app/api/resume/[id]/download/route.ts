@@ -20,12 +20,14 @@ export async function GET(
     }
 
     // Generar el PDF
-    const stream = await renderToStream(React.createElement(ResumePDF, { resume }));
+    // @ts-expect-error - React.createElement type incompatibility with @react-pdf/renderer
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const stream = await renderToStream(React.createElement(ResumePDF, { resume }) as any);
 
     // Convertir stream a buffer
-    const chunks: Uint8Array[] = [];
+    const chunks: Buffer[] = [];
     for await (const chunk of stream) {
-      chunks.push(chunk);
+      chunks.push(Buffer.from(chunk));
     }
     const buffer = Buffer.concat(chunks);
 
