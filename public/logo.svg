@@ -18,7 +18,7 @@
   <!-- Text -->
   <g id="text">
     <!-- Better -->
-    <text x="105" y="55" font-family="system-ui, -apple-system, sans-serif" font-size="42" font-weight="700" fill="#1f2937" letter-spacing="-1">Better</text>
+    <text x="105" y="55" font-family="system-ui, -apple-system, sans-serif" font-size="42" font-weight="700" fill="white" letter-spacing="-1">Better</text>
     
     <!-- Resume with Gradient -->
     <text x="105" y="90" font-family="system-ui, -apple-system, sans-serif" font-size="42" font-weight="700" fill="url(#textGradient)" letter-spacing="-1">Resume</text>
