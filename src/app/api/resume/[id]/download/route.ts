@@ -6,10 +6,11 @@ import React from 'react';
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const resume = await getResumeByIdForPreview(params.id);
+    const { id } = await params;
+    const resume = await getResumeByIdForPreview(id);
 
     if (!resume) {
       return NextResponse.json(
