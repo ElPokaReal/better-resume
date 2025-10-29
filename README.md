@@ -11,10 +11,20 @@
     <a href="#contributing">Contributing</a>
   </p>
 
-  ![Next.js](https://img.shields.io/badge/Next.js-16.0-black?style=flat-square&logo=next.js)
-  ![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue?style=flat-square&logo=typescript)
-  ![TailwindCSS](https://img.shields.io/badge/TailwindCSS-4.0-38bdf8?style=flat-square&logo=tailwindcss)
-  ![License](https://img.shields.io/badge/License-MIT-green?style=flat-square)
+  [![Next.js](https://img.shields.io/badge/Next.js-16.0-black?style=for-the-badge&logo=next.js)](https://nextjs.org/)
+  [![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue?style=for-the-badge&logo=typescript)](https://www.typescriptlang.org/)
+  [![TailwindCSS](https://img.shields.io/badge/TailwindCSS-4.0-38bdf8?style=for-the-badge&logo=tailwindcss)](https://tailwindcss.com/)
+  [![React](https://img.shields.io/badge/React-19-61dafb?style=for-the-badge&logo=react)](https://react.dev/)
+  
+  [![Neon](https://img.shields.io/badge/Neon-Database-00e699?style=for-the-badge)](https://neon.tech/)
+  [![Drizzle](https://img.shields.io/badge/Drizzle-ORM-c5f74f?style=for-the-badge)](https://orm.drizzle.team/)
+  [![Better Auth](https://img.shields.io/badge/Better-Auth-ff6b6b?style=for-the-badge)](https://www.better-auth.com/)
+  
+  [![Netlify](https://img.shields.io/badge/Netlify-Deployed-00c7b7?style=for-the-badge&logo=netlify)](https://better-resume-gen.netlify.app)
+  [![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)](LICENSE)
+  
+  ![GitHub stars](https://img.shields.io/github/stars/ElPokaReal/better-resume?style=for-the-badge)
+  ![GitHub forks](https://img.shields.io/github/forks/ElPokaReal/better-resume?style=for-the-badge)
 </div>
 
 ---
