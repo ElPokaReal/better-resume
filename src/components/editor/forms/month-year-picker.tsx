@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 
 interface MonthYearPickerProps {
   value: string; // Format: "YYYY-MM"
@@ -10,12 +11,14 @@ interface MonthYearPickerProps {
   disabled?: boolean;
 }
 
-const MONTHS = [
-  'Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun',
-  'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'
-];
-
 export function MonthYearPicker({ value, onChange, label, disabled }: MonthYearPickerProps) {
+  const t = useTranslations('editor.monthPicker');
+  
+  const MONTHS = [
+    t('months.jan'), t('months.feb'), t('months.mar'), t('months.apr'),
+    t('months.may'), t('months.jun'), t('months.jul'), t('months.aug'),
+    t('months.sep'), t('months.oct'), t('months.nov'), t('months.dec')
+  ];
   const [isOpen, setIsOpen] = useState(false);
   const [selectedYear, setSelectedYear] = useState(() => {
     if (value) {
@@ -33,7 +36,7 @@ export function MonthYearPicker({ value, onChange, label, disabled }: MonthYearP
   };
 
   const formatDisplay = (val: string) => {
-    if (!val) return 'Seleccionar';
+    if (!val) return t('select');
     const [year, month] = val.split('-');
     return `${MONTHS[parseInt(month) - 1]} ${year}`;
   };

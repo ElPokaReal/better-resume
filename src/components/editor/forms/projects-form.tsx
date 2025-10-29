@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { useTranslations } from 'next-intl';
 import { DndContext, closestCenter, KeyboardSensor, PointerSensor, useSensor, useSensors, DragEndEvent } from '@dnd-kit/core';
 import { arrayMove, SortableContext, sortableKeyboardCoordinates, verticalListSortingStrategy } from '@dnd-kit/sortable';
 import { SortableItem } from '../sortable-item';
@@ -15,6 +16,7 @@ interface ProjectsFormProps {
 }
 
 export function ProjectsForm({ resume, onUpdate }: ProjectsFormProps) {
+  const t = useTranslations('editor.projects');
   const [items, setItems] = useState<Project[]>(resume.projects || []);
   const [editingId, setEditingId] = useState<string | null>(null);
   const [formData, setFormData] = useState<Partial<Project>>({});
@@ -83,44 +85,44 @@ export function ProjectsForm({ resume, onUpdate }: ProjectsFormProps) {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Proyectos</h3>
-          <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">Muestra tus proyectos destacados</p>
+          <h3 className="text-lg font-semibold text-gray-900 dark:text-white">{t('title')}</h3>
+          <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">{t('subtitle')}</p>
         </div>
         <button onClick={handleAdd} className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-sm font-medium transition-colors">
           <Plus className="w-4 h-4" />
-          Agregar
+          {t('add')}
         </button>
       </div>
 
       {editingId && (
         <div className="p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg space-y-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Nombre del Proyecto *</label>
-            <input value={formData.name || ''} onChange={(e) => setFormData({ ...formData, name: e.target.value })} type="text" className="w-full px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Mi Proyecto Increíble" />
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">{t('name')} {t('required')}</label>
+            <input value={formData.name || ''} onChange={(e) => setFormData({ ...formData, name: e.target.value })} type="text" className="w-full px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder={t('placeholders.name')} />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Descripción *</label>
-            <textarea value={formData.description || ''} onChange={(e) => setFormData({ ...formData, description: e.target.value })} rows={3} className="w-full px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none" placeholder="Describe tu proyecto..." />
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">{t('description')} {t('required')}</label>
+            <textarea value={formData.description || ''} onChange={(e) => setFormData({ ...formData, description: e.target.value })} rows={3} className="w-full px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none" placeholder={t('placeholders.description')} />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">URL del Proyecto</label>
-            <input value={formData.url || ''} onChange={(e) => setFormData({ ...formData, url: e.target.value })} type="url" className="w-full px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="https://miproyecto.com" />
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">{t('url')}</label>
+            <input value={formData.url || ''} onChange={(e) => setFormData({ ...formData, url: e.target.value })} type="url" className="w-full px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder={t('placeholders.url')} />
           </div>
           <div className="grid grid-cols-2 gap-4">
             <MonthYearPicker
-              label="Fecha de Inicio"
+              label={t('startDate')}
               value={formData.startDate || ''}
               onChange={(value) => setFormData({ ...formData, startDate: value })}
             />
             <MonthYearPicker
-              label="Fecha de Fin"
+              label={t('endDate')}
               value={formData.endDate || ''}
               onChange={(value) => setFormData({ ...formData, endDate: value })}
             />
           </div>
           <div className="flex gap-2">
-            <button onClick={handleSave} className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-sm font-medium transition-colors">Guardar</button>
-            <button onClick={() => { setEditingId(null); setFormData({}); }} className="px-4 py-2 bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 text-gray-900 dark:text-white rounded-lg text-sm font-medium transition-colors">Cancelar</button>
+            <button onClick={handleSave} className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-sm font-medium transition-colors">{t('save')}</button>
+            <button onClick={() => { setEditingId(null); setFormData({}); }} className="px-4 py-2 bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 text-gray-900 dark:text-white rounded-lg text-sm font-medium transition-colors">{t('cancel')}</button>
           </div>
         </div>
       )}
@@ -136,7 +138,7 @@ export function ProjectsForm({ resume, onUpdate }: ProjectsFormProps) {
                     <p className="text-sm text-gray-600 dark:text-gray-400 line-clamp-2">{item.description}</p>
                   </div>
                   <div className="flex gap-2">
-                    <button onClick={() => handleEdit(item)} className="text-blue-600 hover:text-blue-700 text-sm font-medium">Editar</button>
+                    <button onClick={() => handleEdit(item)} className="text-blue-600 hover:text-blue-700 text-sm font-medium">{t('edit')}</button>
                     <button onClick={() => handleDelete(item.id)} className="text-red-600 hover:text-red-700"><Trash2 className="w-4 h-4" /></button>
                   </div>
                 </div>
@@ -148,7 +150,7 @@ export function ProjectsForm({ resume, onUpdate }: ProjectsFormProps) {
 
       {items.length === 0 && !editingId && (
         <div className="text-center py-8 text-gray-500 dark:text-gray-400">
-          <p>No has agregado proyectos</p>
+          <p>{t('empty')}</p>
         </div>
       )}
     </div>

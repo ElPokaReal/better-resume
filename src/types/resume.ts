@@ -124,6 +124,7 @@ export const resumeSchema = z.object({
   design: designSchema.optional(),
   sectionVisibility: sectionVisibilitySchema,
   isPublic: z.boolean().default(false),
+  isFavorite: z.boolean().default(false),
   viewCount: z.number().default(0),
   downloadCount: z.number().default(0),
   lastViewedAt: z.date().optional(),

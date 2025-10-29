@@ -6,6 +6,57 @@ import { eq, desc } from 'drizzle-orm';
 import { auth } from '../../../auth';
 import { headers } from 'next/headers';
 import { revalidatePath } from 'next/cache';
+// Cache en memoria para reducir llamadas a DB
+// Solo cachea durante la sesión del servidor (se reinicia con cada deploy)
+const resumeCache = new Map<string, { data: unknown; timestamp: number }>();
+const CACHE_TTL = 30000; // 30 segundos
+
+// Helper para limpiar cache expirado
+function cleanExpiredCache() {
+  const now = Date.now();
+  for (const [key, value] of resumeCache.entries()) {
+    if (now - value.timestamp > CACHE_TTL) {
+      resumeCache.delete(key);
+    }
+  }
+}
+
+// Helper para retry con backoff exponencial (maneja timeouts de Neon)
+async function retryWithBackoff<T>(
+  fn: () => Promise<T>,
+  maxRetries = 3,
+  initialDelay = 1000
+): Promise<T> {
+  let lastError: unknown;
+  
+  for (let i = 0; i < maxRetries; i++) {
+    try {
+      return await fn();
+    } catch (error: unknown) {
+      lastError = error;
+      
+      // Solo reintentar en errores de timeout/conexión
+      const errorMessage = error instanceof Error ? error.message : String(error);
+      const errorCode = (error as { code?: string })?.code;
+      
+      const isRetryable = 
+        errorMessage.includes('timeout') ||
+        errorMessage.includes('ETIMEDOUT') ||
+        errorMessage.includes('ECONNREFUSED') ||
+        errorCode === 'NeonDbError';
+      
+      if (!isRetryable || i === maxRetries - 1) {
+        throw error;
+      }
+      
+      // Backoff exponencial: 1s, 2s, 4s
+      const delay = initialDelay * Math.pow(2, i);
+      await new Promise(resolve => setTimeout(resolve, delay));
+    }
+  }
+  
+  throw lastError;
+}
 
 export async function getUserResumes() {
   const session = await auth.api.getSession({
@@ -23,8 +74,10 @@ export async function getUserResumes() {
       title: resume.title,
       templateId: resume.templateId,
       updatedAt: resume.updatedAt,
+      createdAt: resume.createdAt,
       design: resume.design, // Solo para colores del placeholder
       isPublic: resume.isPublic,
+      isFavorite: resume.isFavorite,
     })
     .from(resume)
     .where(eq(resume.userId, session.user.id))
@@ -65,6 +118,40 @@ export async function toggleResumePublic(id: string) {
     .where(eq(resume.id, id));
 
   return !currentResume.isPublic;
+}
+
+export async function toggleResumeFavorite(id: string) {
+  'use server';
+  
+  const session = await auth.api.getSession({
+    headers: await headers(),
+  });
+
+  if (!session?.user?.id) {
+    throw new Error('No autenticado');
+  }
+
+  // Obtener el resume actual
+  const [currentResume] = await db
+    .select({ isFavorite: resume.isFavorite })
+    .from(resume)
+    .where(eq(resume.id, id))
+    .limit(1);
+
+  if (!currentResume) {
+    throw new Error('CV no encontrado');
+  }
+
+  // Toggle isFavorite
+  await db
+    .update(resume)
+    .set({ 
+      isFavorite: !currentResume.isFavorite,
+      updatedAt: new Date(),
+    })
+    .where(eq(resume.id, id));
+
+  return !currentResume.isFavorite;
 }
 
 export async function duplicateResume(id: string) {
@@ -265,26 +352,56 @@ export async function updateResume(id: string, data: Partial<typeof resume.$infe
     throw new Error('No autenticado');
   }
 
-  // Verificar que el resume pertenece al usuario
-  const [existingResume] = await db
-    .select()
-    .from(resume)
-    .where(eq(resume.id, id))
-    .limit(1);
+  // Verificar cache primero para evitar query innecesaria
+  const cacheKey = `resume-owner-${id}-${session.user.id}`;
+  const cached = resumeCache.get(cacheKey);
+  const now = Date.now();
+  
+  let isOwner = false;
+  
+  if (cached && (now - cached.timestamp) < CACHE_TTL) {
+    // Usar cache
+    isOwner = cached.data as boolean;
+  } else {
+    // Verificar ownership en DB (query mínima)
+    const [existingResume] = await db
+      .select({ userId: resume.userId })
+      .from(resume)
+      .where(eq(resume.id, id))
+      .limit(1);
 
-  if (!existingResume || existingResume.userId !== session.user.id) {
+    if (!existingResume) {
+      throw new Error('CV no encontrado');
+    }
+    
+    isOwner = existingResume.userId === session.user.id;
+    
+    // Guardar en cache
+    resumeCache.set(cacheKey, { data: isOwner, timestamp: now });
+  }
+
+  if (!isOwner) {
     throw new Error('No autorizado');
   }
 
-  // Actualizar el resume
-  const [updatedResume] = await db
-    .update(resume)
-    .set({
-      ...data,
-      updatedAt: new Date(),
-    })
-    .where(eq(resume.id, id))
-    .returning();
+  // Actualizar el resume con retry logic
+  const updatedResume = await retryWithBackoff(async () => {
+    const [result] = await db
+      .update(resume)
+      .set({
+        ...data,
+        updatedAt: new Date(),
+      })
+      .where(eq(resume.id, id))
+      .returning();
+    return result;
+  });
+
+  // Invalidar cache del resume completo
+  resumeCache.delete(`resume-${id}`);
+  
+  // Limpiar cache expirado
+  cleanExpiredCache();
 
   return updatedResume;
 }

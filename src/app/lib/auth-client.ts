@@ -18,7 +18,7 @@ export const {
 export const signInWithGitHub = async () => {
   await signIn.social({
     provider: 'github',
-    callbackURL: '/dashboard',
+    callbackURL: '/en/dashboard',
   });
 };
 
@@ -26,6 +26,6 @@ export const signInWithGitHub = async () => {
 export const signInWithGoogle = async () => {
   await signIn.social({
     provider: 'google',
-    callbackURL: '/dashboard',
+    callbackURL: '/en/dashboard',
   });
 };

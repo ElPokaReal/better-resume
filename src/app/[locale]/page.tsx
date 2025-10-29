@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { ArrowRight } from 'lucide-react';
 import { ThemeToggle } from '@/components/theme-toggle';
 import { LanguageSwitcher } from '@/components/language-switcher';
@@ -245,6 +246,23 @@ export default function Home() {
           </div>
         </div>
       </footer>
+
+      {/* Ko-fi Button - Sticky Bottom Left */}
+      <a 
+        href="https://ko-fi.com/V7V61NL06S" 
+        target="_blank" 
+        rel="noopener noreferrer"
+        className="fixed bottom-6 left-6 z-50 hover:scale-110 active:scale-95 transition-transform duration-200 shadow-2xl rounded-lg"
+      >
+        <Image 
+          src="https://storage.ko-fi.com/cdn/kofi1.png?v=6" 
+          alt="Buy Me a Coffee at ko-fi.com"
+          width={150}
+          height={36}
+          className="rounded-lg"
+          unoptimized
+        />
+      </a>
     </div>
   );
 }

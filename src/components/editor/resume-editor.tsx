@@ -6,6 +6,7 @@ import { EditorTabs } from './editor-tabs';
 import { EditorPreview } from './editor-preview';
 import { EditorToolbar } from './editor-toolbar';
 import { EditorFormPanel } from './editor-form-panel';
+import { useTranslations } from 'next-intl';
 import type { Resume, EditorSection } from '@/types/resume';
 
 interface ResumeEditorProps {
@@ -13,6 +14,7 @@ interface ResumeEditorProps {
 }
 
 export function ResumeEditor({ initialResume }: ResumeEditorProps) {
+  const t = useTranslations('editor.tabs');
   const [resume, setResume] = useState<Resume>(initialResume);
   const [activeSection, setActiveSection] = useState<EditorSection>('personal-info');
   const [isSaving, setIsSaving] = useState(false);
@@ -72,17 +74,17 @@ export function ResumeEditor({ initialResume }: ResumeEditorProps) {
 
   const { progress, completedSections } = calculateProgress();
 
-  // Auto-save cuando cambia el resume
+  // Auto-save cuando cambia el resume (3 segundos para reducir llamadas a DB)
   useEffect(() => {
     // Limpiar timeout anterior
     if (saveTimeoutRef.current) {
       clearTimeout(saveTimeoutRef.current);
     }
 
-    // Crear nuevo timeout para auto-guardar después de 2 segundos
+    // Crear nuevo timeout para auto-guardar después de 3 segundos
     saveTimeoutRef.current = setTimeout(() => {
       handleSave();
-    }, 2000);
+    }, 3000);
 
     // Cleanup
     return () => {
@@ -231,7 +233,7 @@ export function ResumeEditor({ initialResume }: ResumeEditorProps) {
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
             </svg>
-            <span className="text-xs font-medium">Editar</span>
+            <span className="text-xs font-medium">{t('edit')}</span>
           </button>
 
           {/* Preview Button */}
@@ -247,23 +249,22 @@ export function ResumeEditor({ initialResume }: ResumeEditorProps) {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
             </svg>
-            <span className="text-xs font-medium">Preview</span>
+            <span className="text-xs font-medium">{t('preview')}</span>
           </button>
         </div>
-
         {/* Mobile Tabs - Horizontal Scroll */}
         {!showPreview && (
           <div className="overflow-x-auto border-t border-gray-200 dark:border-gray-800">
             <div className="flex gap-1 p-2 min-w-max">
               {[
-                { id: 'personal-info', icon: '👤', label: 'Personal' },
-                { id: 'experience', icon: '💼', label: 'Experiencia' },
-                { id: 'education', icon: '🎓', label: 'Educación' },
-                { id: 'skills', icon: '💻', label: 'Habilidades' },
-                { id: 'projects', icon: '📁', label: 'Proyectos' },
-                { id: 'certifications', icon: '🏆', label: 'Certificaciones' },
-                { id: 'languages', icon: '🌐', label: 'Idiomas' },
-                { id: 'design', icon: '🎨', label: 'Diseño' },
+                { id: 'personal-info', icon: '👤', label: t('personalInfo') },
+                { id: 'experience', icon: '💼', label: t('experience') },
+                { id: 'education', icon: '🎓', label: t('education') },
+                { id: 'skills', icon: '💻', label: t('skills') },
+                { id: 'projects', icon: '📁', label: t('projects') },
+                { id: 'certifications', icon: '🏆', label: t('certifications') },
+                { id: 'languages', icon: '🌐', label: t('languages') },
+                { id: 'design', icon: '🎨', label: t('design') },
               ].map((section) => (
                 <button
                   key={section.id}

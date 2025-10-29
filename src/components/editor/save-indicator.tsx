@@ -2,6 +2,7 @@
 
 import { motion, AnimatePresence } from 'framer-motion';
 import { Check, Cloud, CloudOff, Loader2 } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 
 interface SaveIndicatorProps {
   status: 'idle' | 'saving' | 'saved' | 'error';
@@ -9,44 +10,46 @@ interface SaveIndicatorProps {
 }
 
 export function SaveIndicator({ status, lastSaved }: SaveIndicatorProps) {
+  const t = useTranslations('editor.saveIndicator');
+  
   const getTimeAgo = (date: Date) => {
     const seconds = Math.floor((new Date().getTime() - date.getTime()) / 1000);
     
-    if (seconds < 10) return 'justo ahora';
-    if (seconds < 60) return `hace ${seconds}s`;
+    if (seconds < 10) return t('justNow');
+    if (seconds < 60) return t('secondsAgo', { seconds });
     
     const minutes = Math.floor(seconds / 60);
-    if (minutes < 60) return `hace ${minutes}m`;
+    if (minutes < 60) return t('minutesAgo', { minutes });
     
     const hours = Math.floor(minutes / 60);
-    return `hace ${hours}h`;
+    return t('hoursAgo', { hours });
   };
 
   const statusConfig = {
     idle: {
       icon: Cloud,
-      text: 'Sin cambios',
+      text: t('noChanges'),
       color: 'text-gray-400',
       bgColor: 'bg-gray-100 dark:bg-gray-800',
       animate: false,
     },
     saving: {
       icon: Loader2,
-      text: 'Guardando...',
+      text: t('saving'),
       color: 'text-blue-600',
       bgColor: 'bg-blue-50 dark:bg-blue-900/20',
       animate: true,
     },
     saved: {
       icon: Check,
-      text: lastSaved ? `Guardado ${getTimeAgo(lastSaved)}` : 'Guardado',
+      text: lastSaved ? t('saved', { time: getTimeAgo(lastSaved) }) : t('savedSimple'),
       color: 'text-green-600',
       bgColor: 'bg-green-50 dark:bg-green-900/20',
       animate: false,
     },
     error: {
       icon: CloudOff,
-      text: 'Error al guardar',
+      text: t('error'),
       color: 'text-red-600',
       bgColor: 'bg-red-50 dark:bg-red-900/20',
       animate: false,

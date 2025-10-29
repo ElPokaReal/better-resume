@@ -2,6 +2,7 @@
 
 import { ExternalLink, Mail, Phone, MapPin, Globe, Linkedin, Github } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useTranslations } from 'next-intl';
 import type { Resume } from '@/types/resume';
 
 interface EditorPreviewProps {
@@ -36,6 +37,8 @@ const spacingClasses = {
 };
 
 export function EditorPreview({ resume, previewMode, isExpanded }: EditorPreviewProps) {
+  const t = useTranslations('editor.sections');
+  const tPreview = useTranslations('editor.preview');
   const design = resume.design || {};
   const colorScheme = colorSchemes[design.colorScheme as keyof typeof colorSchemes] || colorSchemes.blue;
   const fontFamily = fontFamilies[design.fontFamily as keyof typeof fontFamilies] || fontFamilies.inter;
@@ -89,7 +92,7 @@ export function EditorPreview({ resume, previewMode, isExpanded }: EditorPreview
                   <div className="flex flex-wrap justify-center gap-x-3 gap-y-1 text-sm mb-4">
                     {resume.personalInfo.website && (
                     <a href={resume.personalInfo.website} target="_blank" rel="noopener noreferrer" className="hover:underline" style={{ color: colorScheme.primary }}>
-                      Sitio Web
+                      {tPreview('website')}
                     </a>
                   )}
                   {resume.personalInfo.linkedin && (
@@ -129,7 +132,7 @@ export function EditorPreview({ resume, previewMode, isExpanded }: EditorPreview
                   className="text-2xl font-bold text-gray-900 mb-4 pb-2 border-b-2"
                   style={{ borderColor: colorScheme.primary }}
                 >
-                  Experiencia Profesional
+                  {t('experience')}
                 </h2>
                 <div className="space-y-6">
                   {resume.experience.map((exp) => (
@@ -142,7 +145,7 @@ export function EditorPreview({ resume, previewMode, isExpanded }: EditorPreview
                           <p className="text-gray-700">{exp.company}</p>
                         </div>
                         <div className="text-sm text-gray-600 text-right">
-                          <p>{exp.startDate} - {exp.current ? 'Presente' : exp.endDate}</p>
+                          <p>{exp.startDate} - {exp.current ? tPreview('present') : exp.endDate}</p>
                           {exp.location && <p>{exp.location}</p>}
                         </div>
                       </div>
@@ -172,7 +175,7 @@ export function EditorPreview({ resume, previewMode, isExpanded }: EditorPreview
                   className="text-2xl font-bold text-gray-900 mb-4 pb-2 border-b-2"
                   style={{ borderColor: colorScheme.primary }}
                 >
-                  Educación
+                  {t('education')}
                 </h2>
                 <div className="space-y-4">
                   {resume.education.map((edu) => (
@@ -185,7 +188,7 @@ export function EditorPreview({ resume, previewMode, isExpanded }: EditorPreview
                           <p className="text-gray-700">{edu.institution}</p>
                         </div>
                         <div className="text-sm text-gray-600 text-right">
-                          <p>{edu.startDate} - {edu.current ? 'Presente' : edu.endDate}</p>
+                          <p>{edu.startDate} - {edu.current ? tPreview('present') : edu.endDate}</p>
                           {edu.location && <p>{edu.location}</p>}
                         </div>
                       </div>
@@ -208,7 +211,7 @@ export function EditorPreview({ resume, previewMode, isExpanded }: EditorPreview
                   className="text-2xl font-bold text-gray-900 mb-4 pb-2 border-b-2"
                   style={{ borderColor: colorScheme.primary }}
                 >
-                  Habilidades
+                  {t('skills')}
                 </h2>
                 <div className="flex flex-wrap gap-2">
                   {resume.skills.map((skill) => (
@@ -234,7 +237,7 @@ export function EditorPreview({ resume, previewMode, isExpanded }: EditorPreview
                   className="text-2xl font-bold text-gray-900 mb-4 pb-2 border-b-2"
                   style={{ borderColor: colorScheme.primary }}
                 >
-                  Proyectos
+                  {t('projects')}
                 </h2>
                 <div className="space-y-4">
                   {resume.projects.map((project) => (
@@ -287,7 +290,7 @@ export function EditorPreview({ resume, previewMode, isExpanded }: EditorPreview
             {resume.sectionVisibility.certifications && resume.certifications.length > 0 && (
               <div className="mb-8">
                 <h2 className="text-2xl font-bold text-gray-900 mb-4 pb-2 border-b-2 border-blue-600">
-                  Certificaciones
+                  {t('certifications')}
                 </h2>
                 <div className="space-y-3">
                   {resume.certifications.map((cert) => (
@@ -308,8 +311,8 @@ export function EditorPreview({ resume, previewMode, isExpanded }: EditorPreview
                 <h2 
                   className="text-2xl font-bold text-gray-900 mb-4 pb-2 border-b-2"
                   style={{ borderColor: colorScheme.primary }}
-                >
-                  Idiomas
+                >  
+                  {t('languages')}
                 </h2>
                 <div className="grid grid-cols-2 gap-3">
                   {resume.languages.map((lang) => (
@@ -348,13 +351,13 @@ export function EditorPreview({ resume, previewMode, isExpanded }: EditorPreview
         {resume.sectionVisibility.experience && resume.experience.length > 0 && (
           <div>
             <h2 className="text-xl font-bold text-gray-900 mb-3 pb-2 border-b-2" style={{ borderColor: colorScheme.primary }}>
-              Experiencia
+              {t('experience')}
             </h2>
             <div className="space-y-4">
               {resume.experience.map((exp) => (
                 <div key={exp.id}>
                   <h3 className="font-semibold text-gray-900">{exp.position}</h3>
-                  <p className="text-sm text-gray-600">{exp.company} • {exp.startDate} - {exp.current ? 'Presente' : exp.endDate}</p>
+                  <p className="text-sm text-gray-600">{exp.company} • {exp.startDate} - {exp.current ? tPreview('present') : exp.endDate}</p>
                   <p className="text-sm text-gray-700 mt-1">{exp.description}</p>
                 </div>
               ))}
@@ -385,7 +388,7 @@ export function EditorPreview({ resume, previewMode, isExpanded }: EditorPreview
         {/* Contact Links */}
         {(resume.personalInfo?.website || resume.personalInfo?.linkedin || resume.personalInfo?.github) && (
           <div>
-            <h3 className="text-sm font-bold text-gray-900 mb-2 uppercase tracking-wide">Enlaces</h3>
+            <h3 className="text-sm font-bold text-gray-900 mb-2 uppercase tracking-wide">{tPreview('links')}</h3>
             <div className="space-y-1 text-sm">
               {resume.personalInfo.website && (
                 <a href={resume.personalInfo.website} target="_blank" rel="noopener noreferrer" className="block hover:underline" style={{ color: colorScheme.primary }}>
@@ -409,7 +412,7 @@ export function EditorPreview({ resume, previewMode, isExpanded }: EditorPreview
         {/* Skills */}
         {resume.sectionVisibility.skills && resume.skills.length > 0 && (
           <div>
-            <h3 className="text-sm font-bold text-gray-900 mb-2 uppercase tracking-wide">Habilidades</h3>
+            <h3 className="text-sm font-bold text-gray-900 mb-2 uppercase tracking-wide">{t('skills')}</h3>
             <div className="flex flex-wrap gap-2">
               {resume.skills.map((skill) => (
                 <span key={skill.id} className="px-2 py-1 rounded text-xs font-medium" style={{ backgroundColor: colorScheme.light, color: colorScheme.dark }}>
@@ -423,7 +426,7 @@ export function EditorPreview({ resume, previewMode, isExpanded }: EditorPreview
         {/* Languages */}
         {resume.sectionVisibility.languages && resume.languages.length > 0 && (
           <div>
-            <h3 className="text-sm font-bold text-gray-900 mb-2 uppercase tracking-wide">Idiomas</h3>
+            <h3 className="text-sm font-bold text-gray-900 mb-2 uppercase tracking-wide">{t('languages')}</h3>
             <div className="space-y-1">
               {resume.languages.map((lang) => (
                 <div key={lang.id} className="text-sm">
@@ -474,12 +477,12 @@ export function EditorPreview({ resume, previewMode, isExpanded }: EditorPreview
         {/* Links */}
         {(resume.personalInfo?.website || resume.personalInfo?.linkedin || resume.personalInfo?.github) && (
           <div>
-            <h3 className="text-sm font-bold text-gray-900 mb-3 uppercase tracking-wide">Enlaces</h3>
+            <h3 className="text-sm font-bold text-gray-900 mb-3 uppercase tracking-wide">{tPreview('links')}</h3>
             <div className="space-y-2 text-sm">
               {resume.personalInfo.website && (
                 <a href={resume.personalInfo.website} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:underline" style={{ color: colorScheme.dark }}>
                   <Globe className="w-4 h-4 flex-shrink-0" />
-                  <span className="break-all">Sitio Web</span>
+                  <span className="break-all">{tPreview('website')}</span>
                 </a>
               )}
               {resume.personalInfo.linkedin && (
@@ -501,7 +504,7 @@ export function EditorPreview({ resume, previewMode, isExpanded }: EditorPreview
         {/* Skills */}
         {resume.sectionVisibility.skills && resume.skills.length > 0 && (
           <div>
-            <h3 className="text-sm font-bold text-gray-900 mb-2 uppercase tracking-wide">Habilidades</h3>
+            <h3 className="text-sm font-bold text-gray-900 mb-2 uppercase tracking-wide">{t('skills')}</h3>
             <div className="flex flex-wrap gap-2">
               {resume.skills.map((skill) => (
                 <span key={skill.id} className="px-2 py-1 bg-white rounded text-xs font-medium" style={{ color: colorScheme.dark }}>
@@ -515,7 +518,7 @@ export function EditorPreview({ resume, previewMode, isExpanded }: EditorPreview
         {/* Languages */}
         {resume.sectionVisibility.languages && resume.languages.length > 0 && (
           <div>
-            <h3 className="text-sm font-bold text-gray-900 mb-2 uppercase tracking-wide">Idiomas</h3>
+            <h3 className="text-sm font-bold text-gray-900 mb-2 uppercase tracking-wide">{t('languages')}</h3>
             <div className="space-y-1">
               {resume.languages.map((lang) => (
                 <div key={lang.id} className="text-sm">
@@ -534,7 +537,7 @@ export function EditorPreview({ resume, previewMode, isExpanded }: EditorPreview
         {resume.personalInfo?.summary && (
           <div>
             <h2 className="text-2xl font-bold text-gray-900 mb-4 pb-2 border-b-2" style={{ borderColor: colorScheme.primary }}>
-              Resumen Profesional
+              {tPreview('summary')}
             </h2>
             <p className="text-sm text-gray-700 leading-relaxed">
               {resume.personalInfo.summary}
@@ -546,13 +549,13 @@ export function EditorPreview({ resume, previewMode, isExpanded }: EditorPreview
         {resume.sectionVisibility.experience && resume.experience.length > 0 && (
           <div>
             <h2 className="text-2xl font-bold text-gray-900 mb-4 pb-2 border-b-2" style={{ borderColor: colorScheme.primary }}>
-              Experiencia Profesional
+              {t('experience')}
             </h2>
             <div className="space-y-4">
               {resume.experience.map((exp) => (
                 <div key={exp.id}>
                   <h3 className="text-lg font-semibold text-gray-900">{exp.position}</h3>
-                  <p className="text-sm text-gray-600">{exp.company} • {exp.startDate} - {exp.current ? 'Presente' : exp.endDate}</p>
+                  <p className="text-sm text-gray-600">{exp.company} • {exp.startDate} - {exp.current ? tPreview('present') : exp.endDate}</p>
                   <p className="text-sm text-gray-700 mt-1">{exp.description}</p>
                 </div>
               ))}
@@ -581,7 +584,7 @@ export function EditorPreview({ resume, previewMode, isExpanded }: EditorPreview
         {resume.sectionVisibility.projects && resume.projects.length > 0 && (
           <div>
             <h2 className="text-2xl font-bold text-gray-900 mb-4 pb-2 border-b-2" style={{ borderColor: colorScheme.primary }}>
-              Proyectos
+              {t('projects')}
             </h2>
             <div className="space-y-3">
               {resume.projects.map((project) => (
@@ -606,9 +609,9 @@ export function EditorPreview({ resume, previewMode, isExpanded }: EditorPreview
       {/* Preview Header */}
       <div className="sticky top-0 bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800 px-6 py-3 z-10">
         <div className="flex items-center justify-between">
-          <h3 className="text-sm font-semibold text-gray-900 dark:text-white">Vista Previa</h3>
+          <h3 className="text-sm font-semibold text-gray-900 dark:text-white">{tPreview('title')}</h3>
           <div className="flex items-center gap-2 text-xs text-gray-500 dark:text-gray-400">
-            <span>Página 1 / 1</span>
+            <span>{tPreview('page', { current: 1, total: 1 })}</span>
           </div>
         </div>
       </div>

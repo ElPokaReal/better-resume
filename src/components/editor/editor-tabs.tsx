@@ -12,6 +12,7 @@ import {
   Palette,
   Check
 } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 import type { EditorSection } from '@/types/resume';
 
 interface EditorTabsProps {
@@ -21,25 +22,26 @@ interface EditorTabsProps {
   progress: number;
 }
 
-const sections = [
-  { id: 'personal-info' as EditorSection, label: 'Personal', icon: User },
-  { id: 'experience' as EditorSection, label: 'Experiencia', icon: Briefcase },
-  { id: 'education' as EditorSection, label: 'Educación', icon: GraduationCap },
-  { id: 'skills' as EditorSection, label: 'Habilidades', icon: Code },
-  { id: 'projects' as EditorSection, label: 'Proyectos', icon: FolderGit2 },
-  { id: 'certifications' as EditorSection, label: 'Certificados', icon: Award },
-  { id: 'languages' as EditorSection, label: 'Idiomas', icon: Languages },
-  { id: 'design' as EditorSection, label: 'Diseño', icon: Palette },
-];
-
 export function EditorTabs({ activeSection, onSectionChange, completedSections, progress }: EditorTabsProps) {
+  const t = useTranslations('editor.tabs');
+  
+  const sections = [
+    { id: 'personal-info' as EditorSection, label: t('personalInfo'), icon: User },
+    { id: 'experience' as EditorSection, label: t('experience'), icon: Briefcase },
+    { id: 'education' as EditorSection, label: t('education'), icon: GraduationCap },
+    { id: 'skills' as EditorSection, label: t('skills'), icon: Code },
+    { id: 'projects' as EditorSection, label: t('projects'), icon: FolderGit2 },
+    { id: 'certifications' as EditorSection, label: t('certifications'), icon: Award },
+    { id: 'languages' as EditorSection, label: t('languages'), icon: Languages },
+    { id: 'design' as EditorSection, label: t('design'), icon: Palette },
+  ];
   return (
     <div className="flex flex-col h-full bg-white dark:bg-gray-900 border-r border-gray-200 dark:border-gray-800">
       {/* Progress Bar */}
       <div className="p-4 border-b border-gray-200 dark:border-gray-800">
         <div className="flex items-center justify-between mb-2">
           <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
-            Progreso
+            {t('progress')}
           </span>
           <span className="text-sm font-semibold text-blue-600">
             {Math.round(progress)}%
@@ -54,7 +56,7 @@ export function EditorTabs({ activeSection, onSectionChange, completedSections, 
           />
         </div>
         <p className="text-xs text-gray-500 dark:text-gray-400 mt-2">
-          {completedSections.length} de {sections.length} secciones completadas
+          {t('sectionsCompleted', { completed: completedSections.length, total: sections.length })}
         </p>
       </div>
 

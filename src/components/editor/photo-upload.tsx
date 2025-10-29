@@ -5,6 +5,7 @@ import { useDropzone } from 'react-dropzone';
 import { Upload, X, Image as ImageIcon } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { toast } from 'sonner';
+import { useTranslations } from 'next-intl';
 
 interface PhotoUploadProps {
   photo?: string;
@@ -12,14 +13,16 @@ interface PhotoUploadProps {
 }
 
 export function PhotoUpload({ photo, onPhotoChange }: PhotoUploadProps) {
+  const t = useTranslations('editor.photoUpload');
+  
   const onDrop = useCallback((acceptedFiles: File[]) => {
     const file = acceptedFiles[0];
     
     if (!file) return;
 
     if (file.size > 5 * 1024 * 1024) {
-      toast.error('La imagen es muy grande', {
-        description: 'El tamaño máximo es 5MB',
+      toast.error(t('errorTooLarge'), {
+        description: t('errorTooLargeDesc'),
       });
       return;
     }
@@ -27,13 +30,13 @@ export function PhotoUpload({ photo, onPhotoChange }: PhotoUploadProps) {
     const reader = new FileReader();
     reader.onload = () => {
       onPhotoChange(reader.result as string);
-      toast.success('Foto cargada exitosamente');
+      toast.success(t('success'));
     };
     reader.onerror = () => {
-      toast.error('Error al cargar la imagen');
+      toast.error(t('errorLoading'));
     };
     reader.readAsDataURL(file);
-  }, [onPhotoChange]);
+  }, [onPhotoChange, t]);
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
@@ -53,7 +56,7 @@ export function PhotoUpload({ photo, onPhotoChange }: PhotoUploadProps) {
       >
         <img
           src={photo}
-          alt="Foto de perfil"
+          alt={t('alt')}
           className="w-32 h-32 rounded-full object-cover border-4 border-gray-200 dark:border-gray-700"
         />
         <motion.button
@@ -91,13 +94,13 @@ export function PhotoUpload({ photo, onPhotoChange }: PhotoUploadProps) {
         )}
         <div>
           <p className="text-sm font-medium text-gray-900 dark:text-white">
-            {isDragActive ? 'Suelta la imagen aquí' : 'Arrastra tu foto aquí'}
+            {isDragActive ? t('dragActive') : t('dragInactive')}
           </p>
           <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
-            o haz click para seleccionar
+            {t('clickToSelect')}
           </p>
           <p className="text-xs text-gray-400 dark:text-gray-500 mt-2">
-            PNG, JPG, WEBP (máx. 5MB)
+            {t('fileTypes')}
           </p>
         </div>
       </motion.div>

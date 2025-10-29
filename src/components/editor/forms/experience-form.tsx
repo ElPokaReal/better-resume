@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useTranslations } from 'next-intl';
 import {
   DndContext,
   closestCenter,
@@ -31,6 +32,8 @@ interface ExperienceFormProps {
 }
 
 export function ExperienceForm({ resume, onUpdate }: ExperienceFormProps) {
+  const t = useTranslations('editor.experience');
+  const tPreview = useTranslations('editor.preview');
   const [experiences, setExperiences] = useState<Experience[]>(resume.experience || []);
   const [editingId, setEditingId] = useState<string | null>(null);
 
@@ -121,10 +124,10 @@ export function ExperienceForm({ resume, onUpdate }: ExperienceFormProps) {
       <div className="flex items-center justify-between">
         <div>
           <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-            Experiencia Profesional
+            {t('title')}
           </h3>
           <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
-            Agrega y ordena tu experiencia laboral
+            {t('subtitle')}
           </p>
         </div>
         <button
@@ -132,7 +135,7 @@ export function ExperienceForm({ resume, onUpdate }: ExperienceFormProps) {
           className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-sm font-medium transition-colors"
         >
           <Plus className="w-4 h-4" />
-          Agregar
+          {t('add')}
         </button>
       </div>
 
@@ -142,13 +145,13 @@ export function ExperienceForm({ resume, onUpdate }: ExperienceFormProps) {
           <div className="grid grid-cols-2 gap-4">
             <div>
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                Puesto *
+                {t('position')} {t('required')}
               </label>
               <input
                 {...register('position')}
                 type="text"
                 className="w-full px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                placeholder="Desarrollador Frontend"
+                placeholder={t('placeholders.position')}
               />
               {errors.position && (
                 <p className="mt-1 text-sm text-red-600">{errors.position.message}</p>
@@ -157,13 +160,13 @@ export function ExperienceForm({ resume, onUpdate }: ExperienceFormProps) {
 
             <div>
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                Empresa *
+                {t('company')} {t('required')}
               </label>
               <input
                 {...register('company')}
                 type="text"
                 className="w-full px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                placeholder="Tech Company Inc."
+                placeholder={t('placeholders.company')}
               />
               {errors.company && (
                 <p className="mt-1 text-sm text-red-600">{errors.company.message}</p>
@@ -173,13 +176,13 @@ export function ExperienceForm({ resume, onUpdate }: ExperienceFormProps) {
 
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-              Ubicación
+              {t('location')}
             </label>
             <input
               {...register('location')}
               type="text"
               className="w-full px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-              placeholder="Ciudad, País"
+              placeholder={t('placeholders.location')}
             />
           </div>
 
@@ -189,7 +192,7 @@ export function ExperienceForm({ resume, onUpdate }: ExperienceFormProps) {
               control={control}
               render={({ field }) => (
                 <MonthYearPicker
-                  label="Fecha de Inicio *"
+                  label={`${t('startDate')} ${t('required')}`}
                   value={field.value || ''}
                   onChange={field.onChange}
                 />
@@ -201,7 +204,7 @@ export function ExperienceForm({ resume, onUpdate }: ExperienceFormProps) {
               control={control}
               render={({ field }) => (
                 <MonthYearPicker
-                  label="Fecha de Fin"
+                  label={t('endDate')}
                   value={field.value || ''}
                   onChange={field.onChange}
                   disabled={isCurrent}
@@ -217,19 +220,19 @@ export function ExperienceForm({ resume, onUpdate }: ExperienceFormProps) {
               className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
             />
             <label className="ml-2 text-sm text-gray-700 dark:text-gray-300">
-              Trabajo actual
+              {t('current')}
             </label>
           </div>
 
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-              Descripción *
+              {t('description')} {t('required')}
             </label>
             <textarea
               {...register('description')}
               rows={3}
               className="w-full px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
-              placeholder="Describe tus responsabilidades y logros..."
+              placeholder={t('placeholders.description')}
             />
             {errors.description && (
               <p className="mt-1 text-sm text-red-600">{errors.description.message}</p>
@@ -241,14 +244,14 @@ export function ExperienceForm({ resume, onUpdate }: ExperienceFormProps) {
               type="submit"
               className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-sm font-medium transition-colors"
             >
-              Guardar
+              {t('save')}
             </button>
             <button
               type="button"
               onClick={handleCancel}
               className="px-4 py-2 bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 text-gray-900 dark:text-white rounded-lg text-sm font-medium transition-colors"
             >
-              Cancelar
+              {t('cancel')}
             </button>
           </div>
         </form>
@@ -266,7 +269,7 @@ export function ExperienceForm({ resume, onUpdate }: ExperienceFormProps) {
                       {exp.position}
                     </h4>
                     <p className="text-sm text-gray-600 dark:text-gray-400">
-                      {exp.company} • {exp.startDate} - {exp.current ? 'Presente' : exp.endDate}
+                      {exp.company} • {exp.startDate} - {exp.current ? tPreview('present') : exp.endDate}
                     </p>
                   </div>
                   <div className="flex gap-2">
@@ -274,7 +277,7 @@ export function ExperienceForm({ resume, onUpdate }: ExperienceFormProps) {
                       onClick={() => handleEdit(exp)}
                       className="text-blue-600 hover:text-blue-700 text-sm font-medium"
                     >
-                      Editar
+                      {t('edit')}
                     </button>
                     <button
                       onClick={() => handleDelete(exp.id)}
@@ -292,8 +295,8 @@ export function ExperienceForm({ resume, onUpdate }: ExperienceFormProps) {
 
       {experiences.length === 0 && !editingId && (
         <div className="text-center py-8 text-gray-500 dark:text-gray-400">
-          <p>No has agregado experiencia laboral</p>
-          <p className="text-sm mt-1">Haz clic en "Agregar" para comenzar</p>
+          <p>{t('empty')}</p>
+          <p className="text-sm mt-1">{t('emptyHint')}</p>
         </div>
       )}
     </div>

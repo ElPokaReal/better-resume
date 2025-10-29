@@ -20,18 +20,77 @@
     "settings": "Configuración",
     "logout": "Cerrar Sesión"
   },
+  "header": {
+    "user": "Usuario",
+    "settings": "Configuración",
+    "logout": "Cerrar sesión"
+  },
   "dashboard": {
     "title": "Mis Currículums",
-    "subtitle": "Gestiona y edita tus currículums profesionales",
-    "createNew": "Crear Nuevo CV",
-    "search": "Buscar currículums...",
+    "subtitle": "{count} {count, plural, one {currículum} other {currículums}} • {favorites} favoritos",
+    "createNew": "Nuevo Currículum",
+    "creating": "Creando...",
+    "search": "Buscar por título...",
     "empty": "No tienes currículums aún",
-    "emptyDescription": "Crea tu primer currículum profesional",
-    "lastUpdated": "Actualizado {time}",
-    "public": "Público",
-    "private": "Privado"
+    "emptyDescription": "Comienza creando tu primer currículum profesional. Es rápido y fácil.",
+    "emptyButton": "Crear mi primer currículum",
+    "emptyFavorites": "No tienes currículums favoritos",
+    "emptyFavoritesDescription": "Haz clic en el icono de estrella de cualquier currículum para agregarlo a favoritos.",
+    "emptyRecent": "No hay currículums recientes",
+    "emptyRecentDescription": "Los currículums que hayas editado en las últimas 24 horas aparecerán aquí.",
+    "emptyFeatures": {
+      "fast": "Rápido y fácil",
+      "customizable": "100% personalizable",
+      "pdf": "Descarga en PDF"
+    },
+    "noResults": "No se encontraron currículums que coincidan con \"{query}\"",
+    "filters": {
+      "all": "Todos",
+      "favorites": "Favoritos",
+      "recent": "Recientes"
+    },
+    "sort": {
+      "label": "Ordenar",
+      "updated": "Última modificación",
+      "created": "Fecha de creación",
+      "title": "Nombre (A-Z)"
+    },
+    "viewMode": {
+      "grid": "Vista en cuadrícula",
+      "list": "Vista en lista"
+    },
+    "card": {
+      "edit": "Editar",
+      "preview": "Vista previa",
+      "view": "Ver",
+      "download": "Descargar PDF",
+      "duplicate": "Duplicar",
+      "delete": "Eliminar",
+      "public": "Público",
+      "updatedAt": "{time}",
+      "createdAt": "Creado {date}",
+      "addToFavorites": "Agregar a favoritos",
+      "removeFromFavorites": "Eliminar de favoritos",
+      "confirmDelete": "Eliminar Currículum",
+      "confirmDeleteMessage": "¿Estás seguro de que deseas eliminar \"{title}\"? Esta acción no se puede deshacer.",
+      "confirmButton": "Eliminar",
+      "cancelButton": "Cancelar"
+    },
+    "loading": "Cargando currículums..."
+  },
+  "preview": {
+    "loading": "Cargando currículum...",
+    "error": "Error de Conexión a la Base de Datos",
+    "errorDescription": "No se puede conectar a la base de datos. La base de datos puede estar pausada o experimentando problemas de conectividad.",
+    "errorHint": "Si estás usando el plan gratuito de Neon, la base de datos puede haberse pausado por inactividad. Por favor espera un momento e intenta refrescar la página.",
+    "retry": "Reintentar",
+    "back": "Volver",
+    "title": "Vista previa del currículum",
+    "edit": "Editar"
   },
   "editor": {
+    "loading": "Cargando editor...",
+    "notFound": "Currículum no encontrado",
     "sections": {
       "personal": "Personal",
       "experience": "Experiencia",
@@ -41,6 +100,182 @@
       "certifications": "Certificaciones",
       "languages": "Idiomas",
       "custom": "Personalizado"
+    },
+    "experience": {
+      "title": "Experiencia Profesional",
+      "subtitle": "Agrega y ordena tu experiencia laboral",
+      "add": "Agregar",
+      "position": "Puesto",
+      "company": "Empresa",
+      "location": "Ubicación",
+      "startDate": "Fecha de Inicio",
+      "endDate": "Fecha de Fin",
+      "current": "Trabajo actual",
+      "description": "Descripción",
+      "save": "Guardar",
+      "cancel": "Cancelar",
+      "edit": "Editar",
+      "delete": "Eliminar",
+      "empty": "No has agregado experiencia laboral",
+      "emptyHint": "Haz clic en \"Agregar\" para comenzar",
+      "required": "*",
+      "placeholders": {
+        "position": "Desarrollador Frontend",
+        "company": "Tech Company Inc.",
+        "location": "Ciudad, País",
+        "description": "Describe tus responsabilidades y logros..."
+      }
+    },
+    "education": {
+      "title": "Educación",
+      "subtitle": "Agrega tu formación académica",
+      "add": "Agregar",
+      "degree": "Título",
+      "field": "Campo de Estudio",
+      "institution": "Institución",
+      "startDate": "Fecha de Inicio",
+      "endDate": "Fecha de Fin",
+      "current": "Estudiando actualmente",
+      "save": "Guardar",
+      "cancel": "Cancelar",
+      "edit": "Editar",
+      "empty": "No has agregado educación",
+      "emptyHint": "Haz clic en \"Agregar\" para comenzar",
+      "required": "*",
+      "placeholders": {
+        "degree": "Licenciatura",
+        "field": "Ingeniería en Sistemas",
+        "institution": "Universidad Nacional"
+      }
+    },
+    "skills": {
+      "title": "Habilidades",
+      "subtitle": "Agrega tus habilidades técnicas y blandas",
+      "placeholder": "Ej: React, TypeScript, Node.js...",
+      "empty": "No has agregado habilidades",
+      "emptyHint": "Escribe una habilidad y presiona Enter"
+    },
+    "projects": {
+      "title": "Proyectos",
+      "subtitle": "Muestra tus proyectos destacados",
+      "add": "Agregar",
+      "name": "Nombre del Proyecto",
+      "description": "Descripción",
+      "url": "URL del Proyecto",
+      "startDate": "Fecha de Inicio",
+      "endDate": "Fecha de Fin",
+      "save": "Guardar",
+      "cancel": "Cancelar",
+      "edit": "Editar",
+      "empty": "No has agregado proyectos",
+      "required": "*",
+      "placeholders": {
+        "name": "Mi Proyecto Increíble",
+        "description": "Describe tu proyecto...",
+        "url": "https://miproyecto.com"
+      }
+    },
+    "monthPicker": {
+      "select": "Seleccionar",
+      "months": {
+        "jan": "Ene",
+        "feb": "Feb",
+        "mar": "Mar",
+        "apr": "Abr",
+        "may": "May",
+        "jun": "Jun",
+        "jul": "Jul",
+        "aug": "Ago",
+        "sep": "Sep",
+        "oct": "Oct",
+        "nov": "Nov",
+        "dec": "Dic"
+      }
+    },
+    "certifications": {
+      "title": "Certificaciones",
+      "subtitle": "Agrega tus certificaciones profesionales",
+      "add": "Agregar",
+      "name": "Nombre",
+      "issuer": "Emisor",
+      "date": "Fecha",
+      "save": "Guardar",
+      "cancel": "Cancelar",
+      "edit": "Editar",
+      "empty": "No has agregado certificaciones",
+      "required": "*"
+    },
+    "languages": {
+      "title": "Idiomas",
+      "subtitle": "Agrega los idiomas que dominas",
+      "add": "Agregar",
+      "language": "Idioma",
+      "proficiency": "Nivel",
+      "save": "Guardar",
+      "cancel": "Cancelar",
+      "edit": "Editar",
+      "empty": "No has agregado idiomas",
+      "required": "*",
+      "placeholder": "Español, Inglés, etc.",
+      "levels": {
+        "basic": "Básico",
+        "conversational": "Conversacional",
+        "fluent": "Fluido",
+        "native": "Nativo"
+      }
+    },
+    "design": {
+      "title": "Diseño y Estilo",
+      "subtitle": "Personaliza la apariencia de tu CV",
+      "colorScheme": "Esquema de Color",
+      "font": "Fuente",
+      "layout": "Diseño",
+      "spacing": "Espaciado",
+      "fontSize": "Tamaño de Fuente",
+      "colors": {
+        "blue": "Azul",
+        "green": "Verde",
+        "purple": "Púrpura",
+        "red": "Rojo",
+        "gray": "Gris"
+      },
+      "layouts": {
+        "single-column": "Una Columna",
+        "two-column": "Dos Columnas",
+        "sidebar": "Con Sidebar"
+      },
+      "layoutDescriptions": {
+        "single": "Layout tradicional centrado",
+        "two": "Contenido principal + sidebar derecho",
+        "sidebar": "Sidebar izquierdo con fondo de color"
+      },
+      "spacings": {
+        "compact": "Compacto",
+        "normal": "Normal",
+        "relaxed": "Relajado"
+      }
+    },
+    "preview": {
+      "title": "Vista Previa",
+      "page": "Página {current} / {total}",
+      "present": "Presente",
+      "website": "Sitio Web",
+      "links": "Enlaces",
+      "summary": "Resumen Profesional"
+    },
+    "tabs": {
+      "progress": "Progreso",
+      "sectionsCompleted": "{completed} de {total} secciones completadas",
+      "personalInfo": "Personal",
+      "experience": "Experiencia",
+      "education": "Educación",
+      "skills": "Habilidades",
+      "projects": "Proyectos",
+      "certifications": "Certificaciones",
+      "languages": "Idiomas",
+      "design": "Diseño",
+      "edit": "Editar",
+      "preview": "Vista Previa"
     },
     "personalInfo": {
       "title": "Información Personal",
@@ -53,18 +288,63 @@
       "linkedin": "LinkedIn",
       "github": "GitHub",
       "summary": "Resumen Profesional",
-      "photo": "Foto de Perfil"
+      "photo": "Foto de Perfil",
+      "required": "*",
+      "placeholders": {
+        "fullName": "Juan Pérez",
+        "email": "juan@ejemplo.com",
+        "phone": "+1 (555) 123-4567",
+        "location": "Ciudad, País",
+        "website": "https://tuportfolio.com",
+        "linkedin": "https://linkedin.com/in/tuperfil",
+        "github": "https://github.com/tuusuario",
+        "summary": "Breve descripción sobre ti y tu experiencia..."
+      }
+    },
+    "photoUpload": {
+      "alt": "Foto de perfil",
+      "dragActive": "Suelta la imagen aquí",
+      "dragInactive": "Arrastra tu foto aquí",
+      "clickToSelect": "o haz click para seleccionar",
+      "fileTypes": "PNG, JPG, WEBP (máx. 5MB)",
+      "errorTooLarge": "La imagen es muy grande",
+      "errorTooLargeDesc": "El tamaño máximo es 5MB",
+      "errorLoading": "Error al cargar la imagen",
+      "success": "Foto cargada exitosamente"
+    },
+    "saveIndicator": {
+      "justNow": "justo ahora",
+      "secondsAgo": "hace {seconds}s",
+      "minutesAgo": "hace {minutes}m",
+      "hoursAgo": "hace {hours}h",
+      "noChanges": "Sin cambios",
+      "saving": "Guardando...",
+      "saved": "Guardado {time}",
+      "savedSimple": "Guardado",
+      "error": "Error al guardar"
     },
     "toolbar": {
       "back": "Volver",
+      "save": "Guardar",
       "saving": "Guardando...",
       "saved": "Guardado hace {time}",
+      "completed": "Completado",
       "downloadPDF": "Descargar PDF",
+      "pdfGenerating": "Generando PDF...",
+      "pdfDownloaded": "PDF descargado",
+      "pdfError": "Error al generar PDF",
+      "pdfErrorDescription": "No se pudo exportar el CV. Intenta de nuevo.",
       "share": "Compartir",
       "expand": "Expandir",
       "minimize": "Minimizar",
       "desktop": "Escritorio",
-      "mobile": "Móvil"
+      "mobile": "Móvil",
+      "makePublic": "Hacer público",
+      "makePrivate": "Hacer privado",
+      "publicTooltip": "Cualquiera con el enlace puede ver",
+      "privateTooltip": "Solo tú puedes ver",
+      "linkCopied": "Enlace copiado al portapapeles",
+      "copyLink": "Copiar enlace"
     }
   },
   "landing": {
@@ -106,6 +386,64 @@
       "subtitle": "Gratis para siempre. Sin tarjeta de crédito.",
       "button": "Comenzar gratis"
     },
+    "templates": {
+      "title": "Plantillas Profesionales",
+      "subtitle": "Próximamente",
+      "description": "Estamos trabajando en una colección de plantillas profesionales diseñadas por expertos. Cada plantilla estará optimizada para destacar ante reclutadores y pasar sistemas ATS.",
+      "progress": "Progreso de Desarrollo",
+      "features": {
+        "title": "Qué esperar:",
+        "ats": "Diseños optimizados para ATS",
+        "modern": "Estilos modernos y profesionales",
+        "customizable": "Totalmente personalizables",
+        "variety": "Múltiples industrias y roles"
+      },
+      "notify": "Notificarme cuando esté disponible",
+      "backHome": "Volver al inicio"
+    },
+    "featuresPage": {
+      "title": "Todo lo que necesitas para crear el currículum perfecto",
+      "subtitle": "Características poderosas diseñadas para ayudarte a conseguir el trabajo de tus sueños",
+      "list": {
+        "editor": {
+          "title": "Editor Intuitivo",
+          "description": "Interfaz fácil de usar con vista previa en tiempo real. Ve tus cambios instantáneamente mientras escribes."
+        },
+        "autosave": {
+          "title": "Guardado Automático",
+          "description": "Nunca pierdas tu trabajo. Tu currículum se guarda automáticamente mientras editas."
+        },
+        "multilingual": {
+          "title": "Soporte Multilingüe",
+          "description": "Crea currículums en múltiples idiomas. Cambia entre inglés y español sin problemas."
+        },
+        "customization": {
+          "title": "Personalización Completa",
+          "description": "Personaliza colores, fuentes, diseño y espaciado para que coincida con tu estilo personal."
+        },
+        "sections": {
+          "title": "Secciones Flexibles",
+          "description": "Agrega experiencia, educación, habilidades, proyectos, certificaciones e idiomas. Muestra u oculta secciones según necesites."
+        },
+        "export": {
+          "title": "Exportación a PDF",
+          "description": "Descarga tu currículum en formato PDF de alta calidad, listo para enviar a empleadores."
+        },
+        "responsive": {
+          "title": "Diseño Responsivo",
+          "description": "Edita tu currículum en cualquier dispositivo. Funciona perfectamente en escritorio, tablet y móvil."
+        },
+        "darkMode": {
+          "title": "Modo Oscuro",
+          "description": "Experiencia de edición cómoda con soporte automático de modo oscuro."
+        },
+        "sharing": {
+          "title": "Compartir Fácil",
+          "description": "Comparte tu currículum con un enlace público o manténlo privado. Tú controlas quién lo ve."
+        }
+      },
+      "cta": "Comienza a crear tu currículum"
+    },
     "footer": {
       "tagline": "Crea currículums profesionales en minutos",
       "product": "Producto",
@@ -133,12 +471,21 @@
   },
   "toast": {
     "pdfDownloaded": "PDF descargado",
+    "pdfGenerating": "Generando PDF...",
+    "pdfGenerated": "PDF generado",
+    "pdfDescription": "El PDF se abrirá en una nueva pestaña",
     "pdfError": "Error al generar PDF",
+    "duplicating": "Duplicando CV...",
     "cvDuplicated": "CV duplicado",
+    "deleting": "Eliminando CV...",
     "cvDeleted": "CV eliminado",
+    "deleteError": "Error al eliminar CV",
+    "duplicateError": "Error al duplicar CV",
     "cvPublic": "CV ahora es público",
     "cvPrivate": "CV ahora es privado",
     "linkCopied": "Link copiado al portapapeles",
+    "addedToFavorites": "Agregado a favoritos",
+    "removedFromFavorites": "Eliminado de favoritos",
     "confirmDelete": "¿Estás seguro de eliminar este CV? Esta acción no se puede deshacer."
   }
 }

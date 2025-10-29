@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { useTranslations } from 'next-intl';
 import { DndContext, closestCenter, KeyboardSensor, PointerSensor, useSensor, useSensors, DragEndEvent } from '@dnd-kit/core';
 import { arrayMove, SortableContext, sortableKeyboardCoordinates, verticalListSortingStrategy } from '@dnd-kit/sortable';
 import { SortableItem } from '../sortable-item';
@@ -14,6 +15,7 @@ interface SkillsFormProps {
 }
 
 export function SkillsForm({ resume, onUpdate }: SkillsFormProps) {
+  const t = useTranslations('editor.skills');
   const [items, setItems] = useState<Skill[]>(resume.skills || []);
   const [newSkill, setNewSkill] = useState('');
 
@@ -50,8 +52,8 @@ export function SkillsForm({ resume, onUpdate }: SkillsFormProps) {
   return (
     <div className="space-y-6">
       <div>
-        <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Habilidades</h3>
-        <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">Agrega tus habilidades técnicas y blandas</p>
+        <h3 className="text-lg font-semibold text-gray-900 dark:text-white">{t('title')}</h3>
+        <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">{t('subtitle')}</p>
       </div>
 
       <div className="flex gap-2">
@@ -61,7 +63,7 @@ export function SkillsForm({ resume, onUpdate }: SkillsFormProps) {
           onChange={(e) => setNewSkill(e.target.value)}
           onKeyDown={(e) => e.key === 'Enter' && handleAdd()}
           className="flex-1 px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-          placeholder="Ej: React, TypeScript, Node.js..."
+          placeholder={t('placeholder')}
         />
         <button onClick={handleAdd} className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-colors">
           <Plus className="w-5 h-5" />
@@ -87,8 +89,8 @@ export function SkillsForm({ resume, onUpdate }: SkillsFormProps) {
 
       {items.length === 0 && (
         <div className="text-center py-8 text-gray-500 dark:text-gray-400">
-          <p>No has agregado habilidades</p>
-          <p className="text-sm mt-1">Escribe una habilidad y presiona Enter</p>
+          <p>{t('empty')}</p>
+          <p className="text-sm mt-1">{t('emptyHint')}</p>
         </div>
       )}
     </div>

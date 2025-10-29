@@ -17,11 +17,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Better Resume - Your Resume Builder",
   description: "Create your resume with ease and professionalism",
-  icons: {
-    icon: '/icon.svg',
-    shortcut: '/icon.svg',
-    apple: '/icon.svg',
-  },
+  metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'),
 };
 
 
@@ -33,6 +29,7 @@ export default function RootLayout({
   return (
     <html suppressHydrationWarning>
       <head>
+      <link rel="icon" href="/favicon.svg" sizes="any" />
         <script
           dangerouslySetInnerHTML={{
             __html: `

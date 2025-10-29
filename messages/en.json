@@ -20,18 +20,77 @@
     "settings": "Settings",
     "logout": "Logout"
   },
+  "header": {
+    "user": "User",
+    "settings": "Settings",
+    "logout": "Logout"
+  },
   "dashboard": {
     "title": "My Resumes",
-    "subtitle": "Manage and edit your professional resumes",
-    "createNew": "Create New Resume",
-    "search": "Search resumes...",
+    "subtitle": "{count} {count, plural, one {resume} other {resumes}} • {favorites} favorites",
+    "createNew": "New Resume",
+    "creating": "Creating...",
+    "search": "Search by title...",
     "empty": "You don't have any resumes yet",
-    "emptyDescription": "Create your first professional resume",
-    "lastUpdated": "Updated {time}",
-    "public": "Public",
-    "private": "Private"
+    "emptyDescription": "Start by creating your first professional resume. It's quick and easy.",
+    "emptyButton": "Create my first resume",
+    "emptyFavorites": "You don't have favorite resumes",
+    "emptyFavoritesDescription": "Click the star icon on any resume to add it to your favorites.",
+    "emptyRecent": "No recent resumes",
+    "emptyRecentDescription": "Resumes you've edited in the last 24 hours will appear here.",
+    "emptyFeatures": {
+      "fast": "Quick and easy",
+      "customizable": "100% customizable",
+      "pdf": "Download as PDF"
+    },
+    "noResults": "No resumes found matching \"{query}\"",
+    "filters": {
+      "all": "All",
+      "favorites": "Favorites",
+      "recent": "Recent"
+    },
+    "sort": {
+      "label": "Sort",
+      "updated": "Last modified",
+      "created": "Creation date",
+      "title": "Name (A-Z)"
+    },
+    "viewMode": {
+      "grid": "Grid view",
+      "list": "List view"
+    },
+    "card": {
+      "edit": "Edit",
+      "preview": "Preview",
+      "view": "View",
+      "download": "Download PDF",
+      "duplicate": "Duplicate",
+      "delete": "Delete",
+      "public": "Public",
+      "updatedAt": "{time}",
+      "createdAt": "Created {date}",
+      "addToFavorites": "Add to favorites",
+      "removeFromFavorites": "Remove from favorites",
+      "confirmDelete": "Delete Resume",
+      "confirmDeleteMessage": "Are you sure you want to delete \"{title}\"? This action cannot be undone.",
+      "confirmButton": "Delete",
+      "cancelButton": "Cancel"
+    },
+    "loading": "Loading resumes..."
+  },
+  "preview": {
+    "loading": "Loading resume...",
+    "error": "Database Connection Error",
+    "errorDescription": "Unable to connect to the database. The database might be paused or experiencing connectivity issues.",
+    "errorHint": "If you're using Neon's free tier, the database may have been paused due to inactivity. Please wait a moment and try refreshing the page.",
+    "retry": "Retry",
+    "back": "Back",
+    "title": "Resume preview",
+    "edit": "Edit"
   },
   "editor": {
+    "loading": "Loading editor...",
+    "notFound": "Resume not found",
     "sections": {
       "personal": "Personal",
       "experience": "Experience",
@@ -41,6 +100,182 @@
       "certifications": "Certifications",
       "languages": "Languages",
       "custom": "Custom"
+    },
+    "experience": {
+      "title": "Professional Experience",
+      "subtitle": "Add and order your work experience",
+      "add": "Add",
+      "position": "Position",
+      "company": "Company",
+      "location": "Location",
+      "startDate": "Start Date",
+      "endDate": "End Date",
+      "current": "Current job",
+      "description": "Description",
+      "save": "Save",
+      "cancel": "Cancel",
+      "edit": "Edit",
+      "delete": "Delete",
+      "empty": "You haven't added work experience",
+      "emptyHint": "Click \"Add\" to get started",
+      "required": "*",
+      "placeholders": {
+        "position": "Frontend Developer",
+        "company": "Tech Company Inc.",
+        "location": "City, Country",
+        "description": "Describe your responsibilities and achievements..."
+      }
+    },
+    "education": {
+      "title": "Education",
+      "subtitle": "Add your academic background",
+      "add": "Add",
+      "degree": "Degree",
+      "field": "Field of Study",
+      "institution": "Institution",
+      "startDate": "Start Date",
+      "endDate": "End Date",
+      "current": "Currently studying",
+      "save": "Save",
+      "cancel": "Cancel",
+      "edit": "Edit",
+      "empty": "You haven't added education",
+      "emptyHint": "Click \"Add\" to get started",
+      "required": "*",
+      "placeholders": {
+        "degree": "Bachelor's Degree",
+        "field": "Computer Science",
+        "institution": "National University"
+      }
+    },
+    "skills": {
+      "title": "Skills",
+      "subtitle": "Add your technical and soft skills",
+      "placeholder": "E.g: React, TypeScript, Node.js...",
+      "empty": "You haven't added skills",
+      "emptyHint": "Type a skill and press Enter"
+    },
+    "projects": {
+      "title": "Projects",
+      "subtitle": "Showcase your featured projects",
+      "add": "Add",
+      "name": "Project Name",
+      "description": "Description",
+      "url": "Project URL",
+      "startDate": "Start Date",
+      "endDate": "End Date",
+      "save": "Save",
+      "cancel": "Cancel",
+      "edit": "Edit",
+      "empty": "You haven't added projects",
+      "required": "*",
+      "placeholders": {
+        "name": "My Awesome Project",
+        "description": "Describe your project...",
+        "url": "https://myproject.com"
+      }
+    },
+    "monthPicker": {
+      "select": "Select",
+      "months": {
+        "jan": "Jan",
+        "feb": "Feb",
+        "mar": "Mar",
+        "apr": "Apr",
+        "may": "May",
+        "jun": "Jun",
+        "jul": "Jul",
+        "aug": "Aug",
+        "sep": "Sep",
+        "oct": "Oct",
+        "nov": "Nov",
+        "dec": "Dec"
+      }
+    },
+    "certifications": {
+      "title": "Certifications",
+      "subtitle": "Add your professional certifications",
+      "add": "Add",
+      "name": "Name",
+      "issuer": "Issuer",
+      "date": "Date",
+      "save": "Save",
+      "cancel": "Cancel",
+      "edit": "Edit",
+      "empty": "You haven't added certifications",
+      "required": "*"
+    },
+    "languages": {
+      "title": "Languages",
+      "subtitle": "Add the languages you speak",
+      "add": "Add",
+      "language": "Language",
+      "proficiency": "Proficiency",
+      "save": "Save",
+      "cancel": "Cancel",
+      "edit": "Edit",
+      "empty": "You haven't added languages",
+      "required": "*",
+      "placeholder": "Spanish, English, etc.",
+      "levels": {
+        "basic": "Basic",
+        "conversational": "Conversational",
+        "fluent": "Fluent",
+        "native": "Native"
+      }
+    },
+    "design": {
+      "title": "Design and Style",
+      "subtitle": "Customize the appearance of your CV",
+      "colorScheme": "Color Scheme",
+      "font": "Font",
+      "layout": "Layout",
+      "spacing": "Spacing",
+      "fontSize": "Font Size",
+      "colors": {
+        "blue": "Blue",
+        "green": "Green",
+        "purple": "Purple",
+        "red": "Red",
+        "gray": "Gray"
+      },
+      "layouts": {
+        "single-column": "Single Column",
+        "two-column": "Two Columns",
+        "sidebar": "With Sidebar"
+      },
+      "layoutDescriptions": {
+        "single": "Traditional centered layout",
+        "two": "Main content + right sidebar",
+        "sidebar": "Left sidebar with colored background"
+      },
+      "spacings": {
+        "compact": "Compact",
+        "normal": "Normal",
+        "relaxed": "Relaxed"
+      }
+    },
+    "preview": {
+      "title": "Preview",
+      "page": "Page {current} / {total}",
+      "present": "Present",
+      "website": "Website",
+      "links": "Links",
+      "summary": "Professional Summary"
+    },
+    "tabs": {
+      "progress": "Progress",
+      "sectionsCompleted": "{completed} of {total} sections completed",
+      "personalInfo": "Personal",
+      "experience": "Experience",
+      "education": "Education",
+      "skills": "Skills",
+      "projects": "Projects",
+      "certifications": "Certifications",
+      "languages": "Languages",
+      "design": "Design",
+      "edit": "Edit",
+      "preview": "Preview"
     },
     "personalInfo": {
       "title": "Personal Information",
@@ -53,18 +288,63 @@
       "linkedin": "LinkedIn",
       "github": "GitHub",
       "summary": "Professional Summary",
-      "photo": "Profile Photo"
+      "photo": "Profile Photo",
+      "required": "*",
+      "placeholders": {
+        "fullName": "John Doe",
+        "email": "john@example.com",
+        "phone": "+1 (555) 123-4567",
+        "location": "City, Country",
+        "website": "https://yourportfolio.com",
+        "linkedin": "https://linkedin.com/in/yourprofile",
+        "github": "https://github.com/yourusername",
+        "summary": "Brief description about you and your experience..."
+      }
+    },
+    "photoUpload": {
+      "alt": "Profile photo",
+      "dragActive": "Drop the image here",
+      "dragInactive": "Drag your photo here",
+      "clickToSelect": "or click to select",
+      "fileTypes": "PNG, JPG, WEBP (max. 5MB)",
+      "errorTooLarge": "Image is too large",
+      "errorTooLargeDesc": "Maximum size is 5MB",
+      "errorLoading": "Error loading image",
+      "success": "Photo uploaded successfully"
+    },
+    "saveIndicator": {
+      "justNow": "just now",
+      "secondsAgo": "{seconds}s ago",
+      "minutesAgo": "{minutes}m ago",
+      "hoursAgo": "{hours}h ago",
+      "noChanges": "No changes",
+      "saving": "Saving...",
+      "saved": "Saved {time}",
+      "savedSimple": "Saved",
+      "error": "Error saving"
     },
     "toolbar": {
       "back": "Back",
+      "save": "Save",
       "saving": "Saving...",
       "saved": "Saved {time} ago",
+      "completed": "Completed",
       "downloadPDF": "Download PDF",
+      "pdfGenerating": "Generating PDF...",
+      "pdfDownloaded": "PDF downloaded",
+      "pdfError": "Error generating PDF",
+      "pdfErrorDescription": "Could not export resume. Try again.",
       "share": "Share",
       "expand": "Expand",
       "minimize": "Minimize",
       "desktop": "Desktop",
-      "mobile": "Mobile"
+      "mobile": "Mobile",
+      "makePublic": "Make public",
+      "makePrivate": "Make private",
+      "publicTooltip": "Anyone with the link can view",
+      "privateTooltip": "Only you can view",
+      "linkCopied": "Link copied to clipboard",
+      "copyLink": "Copy link"
     }
   },
   "landing": {
@@ -106,6 +386,64 @@
       "subtitle": "Free forever. No credit card required.",
       "button": "Get started for free"
     },
+    "templates": {
+      "title": "Professional Templates",
+      "subtitle": "Coming Soon",
+      "description": "We're working on a collection of professional templates designed by experts. Each template will be optimized to stand out to recruiters and pass ATS systems.",
+      "progress": "Development Progress",
+      "features": {
+        "title": "What to expect:",
+        "ats": "ATS-optimized designs",
+        "modern": "Modern and professional styles",
+        "customizable": "Fully customizable",
+        "variety": "Multiple industries and roles"
+      },
+      "notify": "Notify me when available",
+      "backHome": "Back to home"
+    },
+    "featuresPage": {
+      "title": "Everything you need to create the perfect resume",
+      "subtitle": "Powerful features designed to help you land your dream job",
+      "list": {
+        "editor": {
+          "title": "Intuitive Editor",
+          "description": "Easy-to-use interface with real-time preview. See your changes instantly as you type."
+        },
+        "autosave": {
+          "title": "Auto-save",
+          "description": "Never lose your work. Your resume is automatically saved as you edit."
+        },
+        "multilingual": {
+          "title": "Multilingual Support",
+          "description": "Create resumes in multiple languages. Switch between English and Spanish seamlessly."
+        },
+        "customization": {
+          "title": "Full Customization",
+          "description": "Customize colors, fonts, layout, and spacing to match your personal style."
+        },
+        "sections": {
+          "title": "Flexible Sections",
+          "description": "Add experience, education, skills, projects, certifications, and languages. Show or hide sections as needed."
+        },
+        "export": {
+          "title": "PDF Export",
+          "description": "Download your resume in high-quality PDF format, ready to send to employers."
+        },
+        "responsive": {
+          "title": "Responsive Design",
+          "description": "Edit your resume on any device. Works perfectly on desktop, tablet, and mobile."
+        },
+        "darkMode": {
+          "title": "Dark Mode",
+          "description": "Comfortable editing experience with automatic dark mode support."
+        },
+        "sharing": {
+          "title": "Easy Sharing",
+          "description": "Share your resume with a public link or keep it private. You control who sees it."
+        }
+      },
+      "cta": "Start creating your resume"
+    },
     "footer": {
       "tagline": "Create professional resumes in minutes",
       "product": "Product",
@@ -133,12 +471,21 @@
   },
   "toast": {
     "pdfDownloaded": "PDF downloaded",
+    "pdfGenerating": "Generating PDF...",
+    "pdfGenerated": "PDF generated",
+    "pdfDescription": "The PDF will open in a new tab",
     "pdfError": "Error generating PDF",
+    "duplicating": "Duplicating resume...",
     "cvDuplicated": "Resume duplicated",
+    "deleting": "Deleting resume...",
     "cvDeleted": "Resume deleted",
+    "deleteError": "Error deleting resume",
+    "duplicateError": "Error duplicating resume",
     "cvPublic": "Resume is now public",
     "cvPrivate": "Resume is now private",
     "linkCopied": "Link copied to clipboard",
+    "addedToFavorites": "Added to favorites",
+    "removedFromFavorites": "Removed from favorites",
     "confirmDelete": "Are you sure you want to delete this resume? This action cannot be undone."
   }
 }

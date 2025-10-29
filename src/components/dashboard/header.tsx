@@ -8,12 +8,14 @@ import { Logo } from '@/components/logo';
 import { User, LogOut, Settings, ChevronDown } from 'lucide-react';
 import { signOut, useSession } from '@/lib/auth-client';
 import { useRouter } from 'next/navigation';
+import { useTranslations } from 'next-intl';
 
 export function DashboardHeader() {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const { data: session } = useSession();
   const router = useRouter();
+  const t = useTranslations('header');
 
   // Close dropdown when clicking outside
   useEffect(() => {
@@ -63,7 +65,7 @@ export function DashboardHeader() {
                 </div>
                 <div className="hidden sm:block text-left">
                   <p className="text-sm font-medium text-gray-900 dark:text-white">
-                    {session?.user?.name || 'Usuario'}
+                    {session?.user?.name || t('user')}
                   </p>
                   <p className="text-xs text-gray-500 dark:text-gray-400">
                     {session?.user?.email || ''}
@@ -77,7 +79,7 @@ export function DashboardHeader() {
                 <div className="absolute right-0 mt-2 w-56 bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 py-2 animate-in fade-in slide-in-from-top-2 duration-200">
                   <div className="px-4 py-3 border-b border-gray-200 dark:border-gray-700">
                     <p className="text-sm font-medium text-gray-900 dark:text-white">
-                      {session?.user?.name || 'Usuario'}
+                      {session?.user?.name || t('user')}
                     </p>
                     <p className="text-xs text-gray-500 dark:text-gray-400 truncate">
                       {session?.user?.email || ''}
@@ -93,7 +95,7 @@ export function DashboardHeader() {
                       className="w-full flex items-center gap-3 px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
                     >
                       <Settings className="w-4 h-4" />
-                      Configuración
+                      {t('settings')}
                     </button>
 
                     <button
@@ -101,7 +103,7 @@ export function DashboardHeader() {
                       className="w-full flex items-center gap-3 px-4 py-2 text-sm text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors"
                     >
                       <LogOut className="w-4 h-4" />
-                      Cerrar sesión
+                      {t('logout')}
                     </button>
                   </div>
                 </div>

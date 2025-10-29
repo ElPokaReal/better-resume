@@ -10,6 +10,7 @@ import { ResumePDF } from '@/components/pdf/resume-pdf';
 import { motion } from 'framer-motion';
 import { SaveIndicator } from './save-indicator';
 import { toggleResumePublic } from '@/app/actions/resume';
+import { useTranslations } from 'next-intl';
 import type { Resume } from '@/types/resume';
 
 interface EditorToolbarProps {
@@ -42,6 +43,8 @@ export function EditorToolbar({
   const [isEditingTitle, setIsEditingTitle] = useState(false);
   const [titleValue, setTitleValue] = useState(resume.title);
   const inputRef = useRef<HTMLInputElement>(null);
+  const t = useTranslations('editor.toolbar');
+  const tToast = useTranslations('toast');
 
   useEffect(() => {
     if (isEditingTitle && inputRef.current) {
@@ -72,7 +75,7 @@ export function EditorToolbar({
 
   const handleDownloadPDF = async () => {
     try {
-      toast.loading('Generando PDF...', { id: 'pdf-download' });
+      toast.loading(t('pdfGenerating'), { id: 'pdf-download' });
       
       // Generar el PDF usando @react-pdf/renderer
       const blob = await pdf(<ResumePDF resume={resume} />).toBlob();
@@ -87,12 +90,12 @@ export function EditorToolbar({
       document.body.removeChild(link);
       URL.revokeObjectURL(url);
       
-      toast.success('PDF descargado', { id: 'pdf-download' });
+      toast.success(t('pdfDownloaded'), { id: 'pdf-download' });
     } catch (error) {
       console.error('Error generating PDF:', error);
-      toast.error('Error al generar PDF', { 
+      toast.error(t('pdfError'), { 
         id: 'pdf-download',
-        description: 'No se pudo exportar el CV. Intenta de nuevo.',
+        description: t('pdfErrorDescription'),
       });
     }
   };
@@ -104,12 +107,12 @@ export function EditorToolbar({
       if (newPublicState) {
         const shareUrl = `${window.location.origin}/preview/${resume.id}`;
         await navigator.clipboard.writeText(shareUrl);
-        toast.success('CV ahora es público', {
-          description: 'Link copiado al portapapeles',
+        toast.success(tToast('cvPublic'), {
+          description: t('linkCopied'),
           icon: <Globe className="w-4 h-4" />,
         });
       } else {
-        toast.success('CV ahora es privado', {
+        toast.success(tToast('cvPrivate'), {
           icon: <Lock className="w-4 h-4" />,
         });
       }
@@ -132,7 +135,7 @@ export function EditorToolbar({
             className="flex items-center gap-1 sm:gap-2 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors shrink-0"
           >
             <ArrowLeft className="w-4 h-4 sm:w-5 sm:h-5" />
-            <span className="hidden sm:inline text-sm">Volver</span>
+            <span className="hidden sm:inline text-sm">{t('back')}</span>
           </ViewTransitionLink>
 
           <div className="hidden sm:block h-6 w-px bg-gray-300 dark:bg-gray-700" />
@@ -185,7 +188,7 @@ export function EditorToolbar({
               </span>
             </div>
             <span className="text-sm font-medium text-blue-600 dark:text-blue-400">
-              Completado
+              {t('completed')}
             </span>
           </div>
         </div>
@@ -203,7 +206,7 @@ export function EditorToolbar({
               }`}
             >
               <Monitor className="w-4 h-4" />
-              <span className="text-sm font-medium">Desktop</span>
+              <span className="text-sm font-medium">{t('desktop')}</span>
             </button>
             <button
               onClick={() => onPreviewModeChange('mobile')}
@@ -214,7 +217,7 @@ export function EditorToolbar({
               }`}
             >
               <Smartphone className="w-4 h-4" />
-              <span className="text-sm font-medium">Mobile</span>
+              <span className="text-sm font-medium">{t('mobile')}</span>
             </button>
           </div>
 
@@ -232,7 +235,7 @@ export function EditorToolbar({
           >
             <Save className="w-4 h-4" />
             <span className="hidden sm:inline">
-              {isSaving ? 'Guardando...' : 'Guardar'}
+              {isSaving ? t('saving') : t('save')}
             </span>
           </motion.button>
 
@@ -241,25 +244,25 @@ export function EditorToolbar({
             className="hidden sm:flex items-center gap-2 px-3 py-2 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-900 dark:text-white rounded-lg font-medium transition-colors text-sm"
           >
             <Download className="w-4 h-4" />
-            <span className="hidden md:inline">Descargar PDF</span>
+            <span className="hidden md:inline">{t('downloadPDF')}</span>
           </button>
 
           <button 
             onClick={handleTogglePublic}
             className="hidden md:flex items-center gap-2 px-3 py-2 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-900 dark:text-white rounded-lg font-medium transition-colors text-sm"
-            title={resume.isPublic ? 'CV público - Click para hacer privado' : 'CV privado - Click para compartir'}
+            title={resume.isPublic ? t('publicTooltip') : t('privateTooltip')}
           >
             {resume.isPublic ? <Globe className="w-4 h-4 text-green-600" /> : <Lock className="w-4 h-4" />}
-            <span className="hidden lg:inline">{resume.isPublic ? 'Público' : 'Compartir'}</span>
+            <span className="hidden lg:inline">{resume.isPublic ? t('makePrivate') : t('makePublic')}</span>
           </button>
 
           <button 
             onClick={onTogglePreviewExpanded}
             className="hidden lg:flex items-center gap-2 px-3 py-2 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-900 dark:text-white rounded-lg font-medium transition-colors"
-            title={isPreviewExpanded ? 'Minimizar vista previa' : 'Expandir vista previa'}
+            title={isPreviewExpanded ? t('minimize') : t('expand')}
           >
             {isPreviewExpanded ? <Minimize2 className="w-4 h-4" /> : <Maximize2 className="w-4 h-4" />}
-            <span className="hidden xl:inline text-sm">{isPreviewExpanded ? 'Minimizar' : 'Expandir'}</span>
+            <span className="hidden xl:inline text-sm">{isPreviewExpanded ? t('minimize') : t('expand')}</span>
           </button>
         </div>
       </div>

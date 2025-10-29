@@ -20,7 +20,17 @@ export function proxy(request: NextRequest) {
   const authRoutes = ['/login', '/signup'];
   
   // Obtener el token de sesión de las cookies
-  const sessionToken = request.cookies.get('better-auth.session_token');
+  // Nota: El prefix es 'better-resume' configurado en auth.ts
+  const sessionToken = request.cookies.get('better-resume.session_token');
+  
+  // Log para debugging
+  if (pathname.includes('/dashboard') || pathname.includes('/login')) {
+    console.log('[Proxy]', {
+      pathname,
+      hasSession: !!sessionToken,
+      sessionToken: sessionToken?.value?.substring(0, 20) + '...',
+    });
+  }
   
   // Remover el locale del pathname para verificar rutas
   const pathnameWithoutLocale = pathname.replace(/^\/(es|en)/, '') || '/';

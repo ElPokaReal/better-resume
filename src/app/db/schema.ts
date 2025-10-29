@@ -180,6 +180,7 @@ export const resume = pgTable('resume', {
   
   // Metadata
   isPublic: boolean('isPublic').notNull().default(false),
+  isFavorite: boolean('isFavorite').notNull().default(false),
   viewCount: integer('viewCount').notNull().default(0),
   downloadCount: integer('downloadCount').notNull().default(0),
   lastViewedAt: timestamp('lastViewedAt'),

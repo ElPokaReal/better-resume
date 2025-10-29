@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { useTranslations } from 'next-intl';
 import type { Resume } from '@/types/resume';
 
 interface DesignFormProps {
@@ -9,6 +10,8 @@ interface DesignFormProps {
 }
 
 export function DesignForm({ resume, onUpdate }: DesignFormProps) {
+  const t = useTranslations('editor.design');
+  
   const [design, setDesign] = useState(resume.design || {
     colorScheme: 'blue' as const,
     fontFamily: 'inter' as const,
@@ -24,11 +27,11 @@ export function DesignForm({ resume, onUpdate }: DesignFormProps) {
   };
 
   const colorSchemes = [
-    { value: 'blue', label: 'Azul', color: '#3B82F6' },
-    { value: 'green', label: 'Verde', color: '#10B981' },
-    { value: 'purple', label: 'Púrpura', color: '#8B5CF6' },
-    { value: 'red', label: 'Rojo', color: '#EF4444' },
-    { value: 'gray', label: 'Gris', color: '#6B7280' },
+    { value: 'blue', label: t('colors.blue'), color: '#3B82F6' },
+    { value: 'green', label: t('colors.green'), color: '#10B981' },
+    { value: 'purple', label: t('colors.purple'), color: '#8B5CF6' },
+    { value: 'red', label: t('colors.red'), color: '#EF4444' },
+    { value: 'gray', label: t('colors.gray'), color: '#6B7280' },
   ];
 
   const fonts = [
@@ -40,21 +43,21 @@ export function DesignForm({ resume, onUpdate }: DesignFormProps) {
   ];
 
   const layouts = [
-    { value: 'single-column', label: 'Una Columna' },
-    { value: 'two-column', label: 'Dos Columnas' },
-    { value: 'sidebar', label: 'Con Sidebar' },
+    { value: 'single-column', label: t('layouts.single-column') },
+    { value: 'two-column', label: t('layouts.two-column') },
+    { value: 'sidebar', label: t('layouts.sidebar') },
   ];
 
   return (
     <div className="space-y-6">
       <div>
-        <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Diseño y Estilo</h3>
-        <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">Personaliza la apariencia de tu CV</p>
+        <h3 className="text-lg font-semibold text-gray-900 dark:text-white">{t('title')}</h3>
+        <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">{t('subtitle')}</p>
       </div>
 
       {/* Color Scheme */}
       <div>
-        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">Esquema de Color</label>
+        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">{t('colorScheme')}</label>
         <div className="grid grid-cols-5 gap-3">
           {colorSchemes.map((scheme) => (
             <button
@@ -75,7 +78,7 @@ export function DesignForm({ resume, onUpdate }: DesignFormProps) {
 
       {/* Font Family */}
       <div>
-        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Fuente</label>
+        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">{t('font')}</label>
         <select
           value={design.fontFamily || 'inter'}
           onChange={(e) => handleChange('fontFamily', e.target.value)}
@@ -90,7 +93,7 @@ export function DesignForm({ resume, onUpdate }: DesignFormProps) {
       {/* Layout */}
       <div>
         <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">
-          Diseño
+          {t('layout')}
         </label>
         <div className="grid grid-cols-3 gap-3">
           {layouts.map((layout) => (
@@ -108,27 +111,27 @@ export function DesignForm({ resume, onUpdate }: DesignFormProps) {
           ))}
         </div>
         <p className="mt-2 text-xs text-gray-500 dark:text-gray-400">
-          • <strong>Una Columna:</strong> Layout tradicional centrado<br />
-          • <strong>Dos Columnas:</strong> Contenido principal + sidebar derecho<br />
-          • <strong>Con Sidebar:</strong> Sidebar izquierdo con fondo de color
+          • <strong>{t('layouts.single-column')}:</strong> {t('layoutDescriptions.single')}<br />
+          • <strong>{t('layouts.two-column')}:</strong> {t('layoutDescriptions.two')}<br />
+          • <strong>{t('layouts.sidebar')}:</strong> {t('layoutDescriptions.sidebar')}
         </p>
       </div>
 
       {/* Spacing */}
       <div>
-        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">Espaciado</label>
+        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">{t('spacing')}</label>
         <div className="grid grid-cols-3 gap-3">
           {['compact', 'normal', 'relaxed'].map((spacing) => (
             <button
               key={spacing}
               onClick={() => handleChange('spacing', spacing)}
-              className={`p-3 rounded-lg border-2 text-sm font-medium capitalize transition-all ${
+              className={`p-3 rounded-lg border-2 text-sm font-medium transition-all ${
                 design.spacing === spacing
                   ? 'border-blue-500 bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300'
                   : 'border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 hover:border-gray-300 dark:hover:border-gray-600'
               }`}
             >
-              {spacing}
+              {t(`spacings.${spacing}`)}
             </button>
           ))}
         </div>
@@ -137,7 +140,7 @@ export function DesignForm({ resume, onUpdate }: DesignFormProps) {
       {/* Font Size */}
       <div>
         <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-          Tamaño de Fuente: {design.fontSize || 14}px
+          {t('fontSize')}: {design.fontSize || 14}px
         </label>
         <input
           type="range"

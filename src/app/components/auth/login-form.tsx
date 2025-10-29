@@ -1,8 +1,8 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { signIn, signInWithGitHub, signInWithGoogle } from '@/lib/auth-client';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { Github, Mail, Lock, Loader2, Eye, EyeOff, ArrowRight } from 'lucide-react';
 
 export function LoginForm() {
@@ -14,6 +14,17 @@ export function LoginForm() {
   const [githubLoading, setGithubLoading] = useState(false);
   const [googleLoading, setGoogleLoading] = useState(false);
   const router = useRouter();
+  const searchParams = useSearchParams();
+
+  // Capturar errores de OAuth desde URL
+  useEffect(() => {
+    const errorParam = searchParams.get('error');
+    const messageParam = searchParams.get('message');
+    
+    if (errorParam === 'oauth_callback_failed') {
+      setError(messageParam || 'Error en la autenticación. La base de datos puede estar pausada.');
+    }
+  }, [searchParams]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
