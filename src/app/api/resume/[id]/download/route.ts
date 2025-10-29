@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { getResumeByIdForPreview } from '@/app/actions/resume';
 import { renderToStream } from '@react-pdf/renderer';
 import { ResumePDF } from '@/components/pdf/resume-pdf';
+import React from 'react';
 
 export async function GET(
   request: NextRequest,
@@ -18,7 +19,7 @@ export async function GET(
     }
 
     // Generar el PDF
-    const stream = await renderToStream(<ResumePDF resume={resume} />);
+    const stream = await renderToStream(React.createElement(ResumePDF, { resume }));
 
     // Convertir stream a buffer
     const chunks: Uint8Array[] = [];
