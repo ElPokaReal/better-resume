@@ -47,3 +47,8 @@
   from = "/*"
   to = "/index.html"
   status = 200
+
+# Scheduled function para mantener Neon activo
+[[functions]]
+  name = "keep-alive"
+  schedule = "*/5 * * * *"
